@@ -3,16 +3,13 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "workspaces": [
-    "backend",
-    "feedback-website"
-  ],
   "scripts": {
-    "dev:backend": "npm run dev --workspace=backend",
-    "dev:frontend": "npm run dev --workspace=feedback-website",
-    "build:backend": "npm run build --workspace=backend",
-    "build:frontend": "npm run build --workspace=feedback-website",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix feedback-website",
+    "build:backend": "npm run build --prefix backend",
+    "build:frontend": "npm run build --prefix feedback-website",
     "build": "npm run build:backend && npm run build:frontend",
-    "start": "npm run start --workspace=backend"
+    "start": "node backend/dist/server.js",
+    "install:all": "npm install --prefix backend && npm install --prefix feedback-website"
   }
 }

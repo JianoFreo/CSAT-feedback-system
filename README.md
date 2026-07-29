@@ -21,7 +21,7 @@ Neon Postgres — `feedback` table
 
 ```
 automated-email-ticket-rating-main/
-├── package.json              # npm workspaces root (backend + feedback-website)
+├── package.json              # root: delegates via --prefix (matches TechCare's pattern, no npm workspaces)
 ├── backend/                  # Express + TypeScript API
 │   ├── .env.example
 │   └── src/
@@ -173,8 +173,9 @@ they must be edited together).
 ## Local development
 
 ```bash
-# from repo root
-npm install                 # installs both workspaces
+# from repo root — installs backend/ and feedback-website/ independently,
+# matching TechCare's --prefix delegation pattern (no npm workspaces)
+npm run install:all
 
 # backend
 cp backend/.env.example backend/.env   # fill in DATABASE_URL (Neon connection string)
@@ -188,14 +189,35 @@ npm run dev:frontend                   # http://localhost:5173
 open "http://localhost:5173/?ticket=12345&rating=5&subject=Cannot%20login"
 ```
 
-`npm run build` (root) builds both workspaces; `npm start` runs the built
-backend, which is the deployable API.
+`npm run build` (root) builds both, delegating via `--prefix`; `npm start`
+runs `node backend/dist/server.js`, the deployable API.
+
+## Scope: this is a single page, not a dashboard
+
+This project is intentionally just the one public feedback page — there is
+no admin UI, no reporting dashboard, and no `GET` route that lists or
+aggregates feedback. The app's only job is: read the URL, show the form,
+insert one row.
+
+Viewing/analyzing submitted feedback happens directly in **Neon**, not in
+this codebase — use the Neon SQL Editor (or any Postgres client pointed at
+`DATABASE_URL`) to query the `feedback` table, e.g.:
+
+```sql
+-- recent feedback
+SELECT * FROM feedback ORDER BY submitted_at DESC LIMIT 50;
+
+-- average rating by day
+SELECT date_trunc('day', submitted_at) AS day, avg(rating), count(*)
+FROM feedback GROUP BY 1 ORDER BY 1 DESC;
+```
+
+If a reporting UI is wanted later, that would be a new, separately
+authenticated set of read-only routes — deliberately out of scope here so
+the public-facing surface stays as small as possible.
 
 ## Known limitations / next steps
 
-- No admin/reporting UI reads from the `feedback` table yet — it's insert-only
-  from this codebase. A dashboard would be a new, separately-authenticated
-  set of `GET` routes.
 - No email/webhook verification on the incoming link — anyone who has (or
   guesses) a valid `ticket`+`rating` pair can submit once. This matches the
   "no login" nature of an emoji-in-email flow; if stronger authenticity is
