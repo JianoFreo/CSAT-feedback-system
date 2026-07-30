@@ -7,6 +7,7 @@ import { feedbackService, FeedbackApiError } from "../services/feedbackService";
 import { CategoryCheckboxes } from "./CategoryCheckboxes";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { AlertBanner } from "./AlertBanner";
+import { getRatingTheme } from "../lib/ratingTheme";
 
 interface FeedbackFormProps {
   ticketId: number;
@@ -16,6 +17,7 @@ interface FeedbackFormProps {
 
 export function FeedbackForm({ ticketId, rating, onSubmitted }: FeedbackFormProps) {
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const theme = getRatingTheme(rating);
 
   const {
     register,
@@ -57,7 +59,7 @@ export function FeedbackForm({ ticketId, rating, onSubmitted }: FeedbackFormProp
           id="feedback"
           rows={5}
           placeholder="What went well, or what could we do better?"
-          className="w-full resize-none rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+          className={`w-full resize-none rounded-2xl border px-4 py-3 text-sm shadow-sm outline-none transition focus:ring-2 ${theme.fieldClass} ${theme.fieldFocusClass}`}
           {...register("feedback")}
         />
         {errors.feedback && (
@@ -72,7 +74,7 @@ export function FeedbackForm({ ticketId, rating, onSubmitted }: FeedbackFormProp
       <button
         type="submit"
         disabled={isSubmitting}
-        className="flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-60"
+        className={`flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60 ${theme.buttonClass} ${theme.buttonHoverClass}`}
       >
         {isSubmitting && <LoadingSpinner className="h-4 w-4 text-white" />}
         {isSubmitting ? "Submitting..." : "Submit feedback"}

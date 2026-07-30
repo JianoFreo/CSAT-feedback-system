@@ -16,12 +16,12 @@ export function CategoryCheckboxes({ register }: CategoryCheckboxesProps) {
         {FEEDBACK_CATEGORIES.map((category) => (
           <label
             key={category}
-            className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-50 has-[:checked]:border-indigo-400 has-[:checked]:bg-indigo-50"
+            className="flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-50 has-checked:border-slate-400 has-checked:bg-slate-50"
           >
             <input
               type="checkbox"
               value={category}
-              className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+              className="h-4 w-4 rounded border-slate-300 text-slate-700 focus:ring-slate-500"
               {...register("categories")}
             />
             {CATEGORY_LABELS[category]}
