@@ -1,5 +1,5 @@
 # CSAT Feedback System
-
+# Live Site: https://csat-feedback-system.onrender.com 
 A public feedback capture flow triggered from Freshdesk emoji-rating emails.
 
 ```
@@ -216,13 +216,4 @@ If a reporting UI is wanted later, that would be a new, separately
 authenticated set of read-only routes — deliberately out of scope here so
 the public-facing surface stays as small as possible.
 
-## Known limitations / next steps
 
-- No email/webhook verification on the incoming link — anyone who has (or
-  guesses) a valid `ticket`+`rating` pair can submit once. This matches the
-  "no login" nature of an emoji-in-email flow; if stronger authenticity is
-  needed later, consider a signed token param (e.g. HMAC of `ticket_id` +
-  `rating`) validated server-side before insert.
-- `subject` is trusted from the URL as display text only; it is never
-  persisted or used in a query, so it carries no injection risk as
-  currently used.
