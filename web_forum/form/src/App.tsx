@@ -1,9 +1,10 @@
 
 
-function App() {
+export default function App() {
   return (
-    <div>App</div>
-  )
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/disappointed" element={<About />} />
+    </Routes>
+  );
 }
-
-export default App
