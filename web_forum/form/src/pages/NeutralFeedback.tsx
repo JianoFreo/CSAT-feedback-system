@@ -73,9 +73,8 @@ export default function NeutralFeedback({
                 key={item.id}
                 type="button"
                 onClick={() => handleNavigate(item.id)}
-                className={`rounded-full border-none px-4 py-2 text-sm font-semibold transition-transform duration-150 hover:-translate-y-0.5 ${
-                  item.id === activeRating ? item.activeClasses : item.idleClasses
-                }`}
+                className={`rounded-full border-none px-4 py-2 text-sm font-semibold transition-transform duration-150 hover:-translate-y-0.5 ${item.id === activeRating ? item.activeClasses : item.idleClasses
+                  }`}
               >
                 {item.label}
               </button>
@@ -107,7 +106,8 @@ export default function NeutralFeedback({
             </p>
 
             <div className="mt-6 grid gap-3">
-           
+              <img src="CC-contactdetails.png" alt="Contact Details" />
+
             </div>
           </article>
 

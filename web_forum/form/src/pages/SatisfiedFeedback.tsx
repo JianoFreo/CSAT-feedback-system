@@ -105,7 +105,7 @@ export default function SatisfiedFeedback({
             </p>
 
             <div className="mt-6 grid gap-3">
-
+              <img src="CC-contactdetails.png" alt="Contact Details" />
             </div>
           </article>
 
