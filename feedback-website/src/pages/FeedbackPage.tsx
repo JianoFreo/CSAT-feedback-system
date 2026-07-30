@@ -4,6 +4,7 @@ import { CompanyLogo } from "../components/CompanyLogo";
 import { TicketInfo } from "../components/TicketInfo";
 import { RatingBadge } from "../components/RatingBadge";
 import { FeedbackForm } from "../components/FeedbackForm";
+import { RatingSelector } from "../components/RatingSelector";
 import { InvalidLinkPage } from "./InvalidLinkPage";
 import { ThankYouPage } from "./ThankYouPage";
 import { getRatingTheme } from "../lib/ratingTheme";
@@ -83,6 +84,8 @@ export function FeedbackPage() {
           <div className="mt-6">
             <FeedbackForm ticketId={ticketId} rating={rating} onSubmitted={() => setSubmitted(true)} />
           </div>
+
+          <RatingSelector currentRating={rating} onRatingChange={() => {}} />
         </section>
       </div>
     </div>
