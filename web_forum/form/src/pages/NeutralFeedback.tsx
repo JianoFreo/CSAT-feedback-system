@@ -1,5 +1,3 @@
-import React from "react";
-import { Check, AlertTriangle, MessageSquareWarning } from "lucide-react";
 
 type Rating = "disappointed" | "neutral" | "satisfied";
 
@@ -104,25 +102,7 @@ export default function NeutralFeedback({
             </p>
 
             <div className="mt-6 grid gap-3">
-              <div className="flex items-start gap-3 rounded-2xl border border-amber-900/10 bg-white/75 p-4">
-                <Check className="mt-0.5 h-5 w-5 flex-none text-amber-700" />
-                <div>
-                  <strong className="block text-sm text-amber-950">Balanced tone</strong>
-                  <span className="text-sm leading-relaxed text-amber-800/70">
-                    Neutral feedback gets a calmer card, softer colors, and a practical next step.
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 rounded-2xl border border-amber-900/10 bg-white/75 p-4">
-                <AlertTriangle className="mt-0.5 h-5 w-5 flex-none text-amber-700" />
-                <div>
-                  <strong className="block text-sm text-amber-950">Quick routing</strong>
-                  <span className="text-sm leading-relaxed text-amber-800/70">
-                    Click another choice above to switch directly to the other satisfaction page.
-                  </span>
-                </div>
-              </div>
+           
             </div>
           </article>
 
@@ -131,20 +111,6 @@ export default function NeutralFeedback({
             aria-label="Feedback form"
             className="rounded-[28px] border border-amber-900/10 bg-white/90 p-3.5 shadow-2xl shadow-amber-900/15 backdrop-blur-lg"
           >
-            <div className="flex flex-col items-start justify-between gap-3 px-2.5 pb-4 pt-2.5 sm:flex-row sm:items-center">
-              <div>
-                <p className="m-0 flex items-center gap-2 text-base font-bold text-amber-950">
-                  <MessageSquareWarning className="h-4 w-4 text-amber-700" />
-                  Neutral response form
-                </p>
-                <p className="m-0 mt-1 text-sm text-amber-800/70">
-                  This embedded form opens the neutral branch for this satisfaction level.
-                </p>
-              </div>
-              <div className="flex-none rounded-full bg-amber-100 px-3 py-2 text-sm font-bold text-amber-800">
-                Routing: middle path
-              </div>
-            </div>
 
             <iframe
               src={formSrc}
