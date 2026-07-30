@@ -1,4 +1,7 @@
 
+
+import { useNavigate } from "react-router-dom";
+
 type Rating = "disappointed" | "neutral" | "satisfied";
 
 interface NeutralFeedbackProps {
@@ -36,11 +39,13 @@ export default function NeutralFeedback({
   onNavigate,
   formSrc = DEFAULT_FORM_SRC,
 }: NeutralFeedbackProps) {
+  const navigate = useNavigate();
   const activeRating: Rating = "neutral";
 
   const handleNavigate = (rating: Rating) => {
     if (rating === activeRating) return;
     onNavigate?.(rating);
+    navigate(`/${rating}`);
   };
 
   return (

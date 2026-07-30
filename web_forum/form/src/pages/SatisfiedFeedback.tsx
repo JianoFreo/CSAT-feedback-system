@@ -1,4 +1,6 @@
 
+import { useNavigate } from "react-router-dom";
+
 type Rating = "disappointed" | "neutral" | "satisfied";
 
 interface SatisfiedFeedbackProps {
@@ -36,11 +38,13 @@ export default function SatisfiedFeedback({
   onNavigate,
   formSrc = DEFAULT_FORM_SRC,
 }: SatisfiedFeedbackProps) {
+  const navigate = useNavigate();
   const activeRating: Rating = "satisfied";
 
   const handleNavigate = (rating: Rating) => {
     if (rating === activeRating) return;
     onNavigate?.(rating);
+    navigate(`/${rating}`);
   };
 
   return (

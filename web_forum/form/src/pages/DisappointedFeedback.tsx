@@ -1,4 +1,7 @@
 
+
+import { useNavigate } from "react-router-dom";
+
 type Rating = "disappointed" | "neutral" | "satisfied";
 
 interface DisappointedFeedbackProps {
@@ -36,11 +39,13 @@ function DisappointedFeedback({
   onNavigate,
   formSrc = DEFAULT_FORM_SRC,
 }: DisappointedFeedbackProps) {
+  const navigate = useNavigate();
   const activeRating: Rating = "disappointed";
 
   const handleNavigate = (rating: Rating) => {
     if (rating === activeRating) return;
     onNavigate?.(rating);
+    navigate(`/${rating}`);
   };
 
   return (
