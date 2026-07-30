@@ -1,4 +1,6 @@
-import { AlertTriangle, Check, MessageSquareWarning } from "lucide-react";
+
+
+import { useNavigate } from "react-router-dom";
 
 type Rating = "disappointed" | "neutral" | "satisfied";
 
@@ -37,11 +39,13 @@ function DisappointedFeedback({
   onNavigate,
   formSrc = DEFAULT_FORM_SRC,
 }: DisappointedFeedbackProps) {
+  const navigate = useNavigate();
   const activeRating: Rating = "disappointed";
 
   const handleNavigate = (rating: Rating) => {
     if (rating === activeRating) return;
     onNavigate?.(rating);
+    navigate(`/${rating}`);
   };
 
   return (
@@ -102,29 +106,7 @@ function DisappointedFeedback({
             </p>
 
             <div className="mt-6 grid gap-3">
-              <div className="flex items-start gap-3 rounded-2xl border border-rose-900/10 bg-white/70 p-4">
-                <AlertTriangle className="mt-0.5 h-5 w-5 flex-none text-rose-700" />
-                <div>
-                  <strong className="block text-sm text-rose-950">Focused recovery</strong>
-                  <span className="text-sm leading-relaxed text-rose-800/70">
-                    This version asks for the details we need to resolve the break in service
-                    quickly.
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 rounded-2xl border border-rose-900/10 bg-white/70 p-4">
-                <Check className="mt-0.5 h-5 w-5 flex-none text-rose-700" />
-                <div>
-                  <strong className="block text-sm text-rose-950">
-                    Switch ratings to change the page
-                  </strong>
-                  <span className="text-sm leading-relaxed text-rose-800/70">
-                    Use the choice buttons above to jump to the neutral or satisfied layout
-                    instantly.
-                  </span>
-                </div>
-              </div>
+            
             </div>
           </article>
 
@@ -133,20 +115,6 @@ function DisappointedFeedback({
             aria-label="Feedback form"
             className="rounded-[28px] border border-rose-900/10 bg-white/85 p-3.5 shadow-2xl shadow-rose-900/15 backdrop-blur-lg"
           >
-            <div className="flex flex-col items-start justify-between gap-3 px-2.5 pb-4 pt-2.5 sm:flex-row sm:items-center">
-              <div>
-                <p className="m-0 flex items-center gap-2 text-base font-bold text-rose-950">
-                  <MessageSquareWarning className="h-4 w-4 text-rose-700" />
-                  Disappointed response form
-                </p>
-                <p className="m-0 mt-1 text-sm text-rose-800/70">
-                  The embedded Microsoft Form opens on the disappointed branch for this choice.
-                </p>
-              </div>
-              <div className="flex-none rounded-full bg-rose-100 px-3 py-2 text-sm font-bold text-rose-800">
-                Routing: unhappy path
-              </div>
-            </div>
 
             <iframe
               src={formSrc}

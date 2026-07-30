@@ -1,5 +1,5 @@
-import React from "react";
-import { Check, AlertTriangle, MessageSquareWarning } from "lucide-react";
+
+import { useNavigate } from "react-router-dom";
 
 type Rating = "disappointed" | "neutral" | "satisfied";
 
@@ -38,11 +38,13 @@ export default function SatisfiedFeedback({
   onNavigate,
   formSrc = DEFAULT_FORM_SRC,
 }: SatisfiedFeedbackProps) {
+  const navigate = useNavigate();
   const activeRating: Rating = "satisfied";
 
   const handleNavigate = (rating: Rating) => {
     if (rating === activeRating) return;
     onNavigate?.(rating);
+    navigate(`/${rating}`);
   };
 
   return (
@@ -70,9 +72,8 @@ export default function SatisfiedFeedback({
                 key={item.id}
                 type="button"
                 onClick={() => handleNavigate(item.id)}
-                className={`rounded-full border-none px-4 py-2 text-sm font-semibold transition-transform duration-150 hover:-translate-y-0.5 ${
-                  item.id === activeRating ? item.activeClasses : item.idleClasses
-                }`}
+                className={`rounded-full border-none px-4 py-2 text-sm font-semibold transition-transform duration-150 hover:-translate-y-0.5 ${item.id === activeRating ? item.activeClasses : item.idleClasses
+                  }`}
               >
                 {item.label}
               </button>
@@ -104,27 +105,7 @@ export default function SatisfiedFeedback({
             </p>
 
             <div className="mt-6 grid gap-3">
-              <div className="flex items-start gap-3 rounded-2xl border border-emerald-900/10 bg-white/75 p-4">
-                <Check className="mt-0.5 h-5 w-5 flex-none text-emerald-700" />
-                <div>
-                  <strong className="block text-sm text-emerald-950">Positive finish</strong>
-                  <span className="text-sm leading-relaxed text-emerald-800/70">
-                    The layout uses brighter greens and softer spacing to match the mood of the
-                    feedback.
-                  </span>
-                </div>
-              </div>
 
-              <div className="flex items-start gap-3 rounded-2xl border border-emerald-900/10 bg-white/75 p-4">
-                <AlertTriangle className="mt-0.5 h-5 w-5 flex-none text-emerald-700" />
-                <div>
-                  <strong className="block text-sm text-emerald-950">Easy switching</strong>
-                  <span className="text-sm leading-relaxed text-emerald-800/70">
-                    Use the choice buttons above to jump to the other satisfaction layouts
-                    instantly.
-                  </span>
-                </div>
-              </div>
             </div>
           </article>
 
@@ -133,20 +114,7 @@ export default function SatisfiedFeedback({
             aria-label="Feedback form"
             className="rounded-[28px] border border-emerald-900/10 bg-white/90 p-3.5 shadow-2xl shadow-emerald-900/15 backdrop-blur-lg"
           >
-            <div className="flex flex-col items-start justify-between gap-3 px-2.5 pb-4 pt-2.5 sm:flex-row sm:items-center">
-              <div>
-                <p className="m-0 flex items-center gap-2 text-base font-bold text-emerald-950">
-                  <MessageSquareWarning className="h-4 w-4 text-emerald-700" />
-                  Satisfied response form
-                </p>
-                <p className="m-0 mt-1 text-sm text-emerald-800/70">
-                  The embedded Microsoft Form opens the satisfied branch for this choice.
-                </p>
-              </div>
-              <div className="flex-none rounded-full bg-emerald-100 px-3 py-2 text-sm font-bold text-emerald-800">
-                Routing: happy path
-              </div>
-            </div>
+
 
             <iframe
               src={formSrc}
