@@ -10,17 +10,22 @@ interface Props {
 export const RatingSwitcher: React.FC<Props> = ({ current, onChange }) => {
   const buttons: { key: RatingKey; label: string; emoji: string }[] = [
     { key: "disappointed", label: "Disappointed", emoji: "😞" },
-    { key: "neutral", label: "Neutral", emoji: "🙂" },
+    { key: "neutral", label: "Neutral", emoji: "😐" },
     { key: "satisfied", label: "Satisfied", emoji: "😄" },
   ];
 
   return (
     <div style={{ display: "flex", gap: 8, justifyContent: "center", margin: "20px 0" }}>
       {buttons.map((b) => (
-        <button
+        <a
           key={b.key}
-          onClick={() => onChange(b.key)}
-          aria-pressed={b.key === current}
+          href={`/${b.key}`}
+          onClick={(event) => {
+            event.preventDefault();
+            onChange(b.key);
+            window.history.pushState({}, "", `/${b.key}`);
+          }}
+          aria-current={b.key === current ? "page" : undefined}
           style={{
             padding: "8px 12px",
             borderRadius: 999,
@@ -32,11 +37,12 @@ export const RatingSwitcher: React.FC<Props> = ({ current, onChange }) => {
             display: "flex",
             gap: 8,
             alignItems: "center",
+            textDecoration: "none",
           }}
         >
           <span style={{ fontSize: 18 }}>{b.emoji}</span>
           <span>{b.label}</span>
-        </button>
+        </a>
       ))}
     </div>
   );

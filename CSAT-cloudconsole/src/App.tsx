@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import RatingSwitcher, { type RatingKey } from './components/RatingSwitcher'
 import SatisfactionPage from './components/SatisfactionPage'
@@ -14,6 +14,16 @@ const formUrls = {
 
 function App() {
   const [rating, setRating] = useState<RatingKey>('neutral')
+
+  useEffect(() => {
+    const path = window.location.pathname.replace('/', '') as RatingKey | ''
+    if (path === 'disappointed' || path === 'neutral' || path === 'satisfied') {
+      setRating(path)
+    } else {
+      window.history.replaceState({}, '', '/neutral')
+      setRating('neutral')
+    }
+  }, [])
 
   return (
     <div style={{ minHeight: '100vh', background: '#f4f6f8', padding: '24px 16px' }}>
@@ -36,7 +46,7 @@ function App() {
           <SatisfactionPage
             title="Thanks for keeping us balanced."
             description="Your feedback helps us understand what to keep doing and what to improve."
-            emoji="🙂"
+            emoji="😐"
             formUrl={formUrls.neutral}
             tone="neutral"
           />
