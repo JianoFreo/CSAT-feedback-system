@@ -65,20 +65,4 @@ constraint and instead `UPSERT` (`ON CONFLICT (ticket_id) DO UPDATE`) in
 
 
 
-## Scope: this is a single page, not a dashboard
-
-This project is intentionally just the one public feedback page — there is
-no admin UI, no reporting dashboard, and no `GET` route that lists or
-aggregates feedback. The app's only job is: read the URL, show the form,
-insert one row.
-
-Viewing/analyzing submitted feedback happens directly in **Neon**, not in
-this codebase — use the Neon SQL Editor (or any Postgres client pointed at
-`DATABASE_URL`) to query the `feedback` table, e.g.:
-
-
-If a reporting UI is wanted later, that would be a new, separately
-authenticated set of read-only routes — deliberately out of scope here so
-the public-facing surface stays as small as possible.
-
 
