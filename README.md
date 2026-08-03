@@ -50,6 +50,14 @@ constraint and instead `UPSERT` (`ON CONFLICT (ticket_id) DO UPDATE`) in
 
 ## Security measures in place
 
+web_forum/form/.env
+
+```ts
+VITE_DISAPPOINTED=yourprefilledform
+VITE_NEUTRAL=yourprefilledform
+VITE_SATISFIED=yourprefilledform
+```
+
 | Concern | Mitigation |
 |---|---|
 | SQL injection | Every query goes through `@neondatabase/serverless`'s tagged-template `sql` with interpolated params — never string concatenation |
