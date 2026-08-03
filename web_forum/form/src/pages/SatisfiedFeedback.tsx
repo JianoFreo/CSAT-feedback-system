@@ -1,5 +1,5 @@
-
 import { useNavigate } from "react-router-dom";
+import { ENV } from "../lib/env.config";
 
 type Rating = "disappointed" | "neutral" | "satisfied";
 
@@ -31,12 +31,10 @@ const NAV_ITEMS: { id: Rating; label: string; activeClasses: string; idleClasses
   },
 ];
 
-const DEFAULT_FORM_SRC =
-  "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=N-0b_WRuKUCUri0p76P1ciMCgbEyRTZKn1onILstHuFUQ05TRklETVcyTU1GTDhHM0k5UFJNQ1E0Ry4u&r17761f2c6eaf42ab878983b1f29c8181=%22Satisfied%20%F0%9F%98%83%22";
 
 export default function SatisfiedFeedback({
   onNavigate,
-  formSrc = DEFAULT_FORM_SRC,
+  formSrc = ENV.SATISFIED,
 }: SatisfiedFeedbackProps) {
   const navigate = useNavigate();
   const activeRating: Rating = "satisfied";
