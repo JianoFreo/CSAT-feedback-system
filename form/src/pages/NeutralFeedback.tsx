@@ -63,7 +63,6 @@ export default function NeutralFeedback({
             </div>
             <div>
               <strong className="block text-sm tracking-wide text-amber-950">Customer Feedback</strong>
-              <span className="text-sm text-amber-800/70">Neutral path</span>
             </div>
           </div>
 

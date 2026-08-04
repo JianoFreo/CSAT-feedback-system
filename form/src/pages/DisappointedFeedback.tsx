@@ -61,7 +61,6 @@ function DisappointedFeedback({
             </div>
             <div>
               <strong className="block text-sm tracking-wide text-rose-950">Customer Feedback</strong>
-              <span className="text-sm text-rose-800/70">Disappointed path</span>
             </div>
           </div>
 

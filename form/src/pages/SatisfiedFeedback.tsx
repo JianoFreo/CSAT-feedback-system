@@ -63,7 +63,6 @@ export default function SatisfiedFeedback({
             </div>
             <div>
               <strong className="block text-sm tracking-wide text-emerald-950">Customer Feedback</strong>
-              <span className="text-sm text-emerald-800/70">Satisfied path</span>
             </div>
           </div>
 
