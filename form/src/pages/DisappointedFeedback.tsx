@@ -13,20 +13,20 @@ const NAV_ITEMS: { id: Rating; label: string; activeClasses: string; idleClasses
   {
     id: "disappointed",
     label: "Disappointed",
-    activeClasses: "bg-gradient-to-br from-rose-600 to-rose-800 text-white",
-    idleClasses: "bg-white text-rose-800 hover:bg-rose-50",
+    activeClasses: "bg-rose-600 text-white",
+    idleClasses: "bg-white text-rose-700 border border-rose-200 hover:bg-rose-50",
   },
   {
     id: "neutral",
     label: "Neutral",
-    activeClasses: "bg-gradient-to-br from-amber-500 to-amber-700 text-white",
-    idleClasses: "bg-white text-amber-700 hover:bg-amber-50",
+    activeClasses: "bg-amber-600 text-white",
+    idleClasses: "bg-white text-amber-700 border border-amber-200 hover:bg-amber-50",
   },
   {
     id: "satisfied",
     label: "Satisfied",
-    activeClasses: "bg-gradient-to-br from-emerald-500 to-emerald-700 text-white",
-    idleClasses: "bg-white text-emerald-700 hover:bg-emerald-50",
+    activeClasses: "bg-emerald-600 text-white",
+    idleClasses: "bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50",
   },
 ];
 
@@ -47,16 +47,12 @@ function DisappointedFeedback({
   const formSrc = `https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=N-0b_WRuKUCUri0p76P1ciMCgbEyRTZKn1onILstHuFUQ05TRklETVcyTU1GTDhHM0k5UFJNQ1E0Ry4u&rb172816ddc0e4f13af725c5872f51b91=${encodeURIComponent(agentName)}&r17761f2c6eaf42ab878983b1f29c8181=%22Disappointed%20%F0%9F%99%81%22`
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-rose-50 via-rose-50 to-rose-100 overflow-hidden">
-      {/* ambient blobs */}
-      <div className="pointer-events-none absolute -top-28 -right-16 h-64 w-64 rounded-full bg-rose-300/25 blur-2xl" />
-      <div className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-rose-200/30 blur-2xl" />
-
-      <main className="relative z-10 mx-auto w-[calc(100%-2rem)] max-w-6xl py-8 pb-10">
+    <div className="min-h-screen bg-rose-50">
+      <main className="mx-auto w-[calc(100%-2rem)] max-w-6xl py-8 pb-10">
         {/* Topbar */}
-        <header className="mb-6 flex flex-col gap-4 rounded-3xl border border-rose-900/10 bg-white/60 p-3 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between">
+        <header className="mb-6 flex flex-col gap-4 rounded-md border border-rose-200 bg-white p-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-rose-600 to-rose-800 text-lg font-bold text-white shadow-lg shadow-rose-900/25">
+            <div className="grid h-11 w-11 place-items-center rounded-md bg-rose-600 text-lg font-bold text-white">
               !
             </div>
             <div>
@@ -70,7 +66,7 @@ function DisappointedFeedback({
                 key={item.id}
                 type="button"
                 onClick={() => handleNavigate(item.id)}
-                className={`rounded-full border-none px-4 py-2 text-sm font-semibold transition-transform duration-150 hover:-translate-y-0.5 ${item.id === activeRating ? item.activeClasses : item.idleClasses
+                className={`rounded-md px-4 py-2 text-sm font-semibold transition ${item.id === activeRating ? item.activeClasses : item.idleClasses
                   }`}
               >
                 {item.label}
@@ -82,14 +78,12 @@ function DisappointedFeedback({
         {/* Hero */}
         <section className="grid grid-cols-1 gap-5 lg:grid-cols-[0.95fr_1.05fr]">
           {/* Summary panel */}
-          <article className="relative overflow-hidden rounded-[28px] border border-rose-900/10 bg-white/85 p-7 shadow-2xl shadow-rose-900/15 backdrop-blur-lg">
-            <div className="pointer-events-none absolute -bottom-20 -right-16 h-56 w-56 rounded-full bg-rose-600/10 blur-2xl" />
-
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-rose-100 px-3 py-2 text-xs font-bold uppercase tracking-wide text-rose-800">
+          <article className="rounded-md border border-rose-200 bg-white p-7 shadow-sm">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-md bg-rose-100 px-3 py-2 text-xs font-bold uppercase tracking-wide text-rose-800">
               Very unsatisfied
             </span>
 
-            <div className="mb-4 grid h-20 w-20 place-items-center rounded-3xl bg-gradient-to-br from-rose-600/15 to-rose-400/20 text-4xl">
+            <div className="mb-4 grid h-20 w-20 place-items-center rounded-md bg-rose-100 text-4xl">
               😞
             </div>
 
@@ -110,7 +104,7 @@ function DisappointedFeedback({
           {/* Form panel */}
           <section
             aria-label="Feedback form"
-            className="rounded-[28px] border border-rose-900/10 bg-white/85 p-3.5 shadow-2xl shadow-rose-900/15 backdrop-blur-lg"
+            className="rounded-md border border-rose-200 bg-white p-3.5 shadow-sm"
           >
 
             <iframe
@@ -119,7 +113,7 @@ function DisappointedFeedback({
               loading="lazy"
               referrerPolicy="no-referrer"
               allowFullScreen
-              className="block min-h-[760px] w-full rounded-[22px] border-0 bg-white"
+              className="block min-h-[760px] w-full rounded-md border-0 bg-white"
             />
           </section>
         </section>

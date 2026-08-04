@@ -1,7 +1,13 @@
 const FEEDBACK_BASE = import.meta.env.VITE_WEB_FORM_URL;
 
 export function buildSurveyTemplate(agentName: string) {
-  const encodedAgent = encodeURIComponent(agentName);
+  const trimmedAgent = agentName.trim();
+  const isGeneral = trimmedAgent.length === 0;
+  const encodedAgent = encodeURIComponent(trimmedAgent);
+  const query = isGeneral ? "" : `?agent=${encodedAgent}`;
+  const heading = isGeneral
+    ? "How satisfied are you with CloudConsole's service?"
+    : `How satisfied are you with CloudConsole and agent ${trimmedAgent}'s service?`;
 
   return `
     <div style="
@@ -46,7 +52,7 @@ export function buildSurveyTemplate(agentName: string) {
                     font-weight: bold;
                     text-align: center;
                   ">
-                    How satisfied are you with CloudConsole and agent ${agentName}'s service?
+                    ${heading}
                   </h2>
 
                   <table
@@ -64,7 +70,7 @@ export function buildSurveyTemplate(agentName: string) {
                         style="padding: 0 9px;"
                       >
                         <a
-                          href="${FEEDBACK_BASE}/disappointed?agent=${encodedAgent}"
+                          href="${FEEDBACK_BASE}/disappointed${query}"
                           style="
                             text-decoration: none;
                             font-size: 32px;
@@ -90,7 +96,7 @@ export function buildSurveyTemplate(agentName: string) {
                         style="padding: 0 9px;"
                       >
                         <a
-                          href="${FEEDBACK_BASE}/neutral?agent=${encodedAgent}"
+                          href="${FEEDBACK_BASE}/neutral${query}"
                           style="
                             text-decoration: none;
                             font-size: 32px;
@@ -116,7 +122,7 @@ export function buildSurveyTemplate(agentName: string) {
                         style="padding: 0 9px;"
                       >
                         <a
-                          href="${FEEDBACK_BASE}/satisfied?agent=${encodedAgent}"
+                          href="${FEEDBACK_BASE}/satisfied${query}"
                           style="
                             text-decoration: none;
                             font-size: 32px;

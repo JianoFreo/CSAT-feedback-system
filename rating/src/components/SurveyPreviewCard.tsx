@@ -45,7 +45,7 @@ export function SurveyPreviewCard({ agentName, onClose }: Props) {
               Survey Preview - Copy the template below to paste via email
             </h2>
             <p className="mt-0.5 text-xs text-gray-500">
-              {agentName}
+              {agentName || "General (no agent)"}
             </p>
           </div>
 
