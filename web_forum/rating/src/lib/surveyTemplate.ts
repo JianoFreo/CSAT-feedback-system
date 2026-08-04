@@ -1,4 +1,4 @@
-const FEEDBACK_BASE = "https://csat-feedback-system.onrender.com";
+const FEEDBACK_BASE = import.meta.env.VITE_WEB_FORM_URL;
 
 export function buildSurveyTemplate(agentName: string) {
   const encodedAgent = encodeURIComponent(agentName);
