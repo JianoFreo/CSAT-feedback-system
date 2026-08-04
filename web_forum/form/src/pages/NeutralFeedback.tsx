@@ -1,5 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import { ENV } from "../lib/env.config";
+import { useNavigate, useParams } from "react-router-dom";
 
 type Rating = "disappointed" | "neutral" | "satisfied";
 
@@ -34,7 +33,6 @@ const NAV_ITEMS: { id: Rating; label: string; activeClasses: string; idleClasses
 
 export default function NeutralFeedback({
   onNavigate,
-  formSrc = ENV.NEUTRAL,
 }: NeutralFeedbackProps) {
   const navigate = useNavigate();
   const activeRating: Rating = "neutral";
@@ -44,6 +42,10 @@ export default function NeutralFeedback({
     onNavigate?.(rating);
     navigate(`/${rating}`);
   };
+  const agentName = useParams<{ agent: string }>().agent || "Unknown";
+
+  const formSrc = `https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=N-0b_WRuKUCUri0p76P1ciMCgbEyRTZKn1onILstHuFUQ05TRklETVcyTU1GTDhHM0k5UFJNQ1E0Ry4u&rb172816ddc0e4f13af725c5872f51b91=${encodeURIComponent(agentName)}&r17761f2c6eaf42ab878983b1f29c8181=${encodeURIComponent("Neutral 😐")}`
+
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-amber-50 via-amber-50 to-amber-100 overflow-hidden">
