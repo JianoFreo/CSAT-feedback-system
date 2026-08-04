@@ -5,7 +5,7 @@ A public feedback capture flow triggered from Freshdesk emoji-rating emails.
 <img width="1502" height="870" alt="image" src="https://github.com/user-attachments/assets/53cf0db7-10ad-4687-9363-34404cb16ef2" />
 <img width="627" height="503" alt="image" src="https://github.com/user-attachments/assets/6acbb761-94fa-45ca-926f-6ed63e927d28" />
 
-# Form ( 3 ratings - Dispappointed, Neutral, Satisfied )
+# Form ( 3 ratings - Disappointed, Neutral, Satisfied )
 <img width="1117" height="855" alt="image" src="https://github.com/user-attachments/assets/9a46796d-88db-40fc-83ec-c70530c57684" />
 <img width="1100" height="848" alt="image" src="https://github.com/user-attachments/assets/6eeafa46-363b-4da3-9ec2-f9204b222265" />
 
