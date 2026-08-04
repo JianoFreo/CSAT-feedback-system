@@ -43,7 +43,7 @@ function DisappointedFeedback({
     navigate(`/${rating}`);
   };
   const [searchParams] = useSearchParams();
-  const agentName = searchParams.get("agent") || "Unknown";
+  const agentName = searchParams.get("agent") || "";
   const formSrc = `https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=N-0b_WRuKUCUri0p76P1ciMCgbEyRTZKn1onILstHuFUQ05TRklETVcyTU1GTDhHM0k5UFJNQ1E0Ry4u&rb172816ddc0e4f13af725c5872f51b91=${encodeURIComponent(agentName)}&r17761f2c6eaf42ab878983b1f29c8181=%22Disappointed%20%F0%9F%99%81%22`
 
   return (
