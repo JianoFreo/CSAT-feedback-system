@@ -7,9 +7,9 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Access />} />
-      <Route path="/disappointed" element={<DisappointedFeedback />} />
-      <Route path="/neutral" element={<NeutralFeedback />} />
-      <Route path="/satisfied" element={<SatisfiedFeedback />} />
+      <Route path="/disappointed/:agent" element={<DisappointedFeedback />} />
+      <Route path="/neutral/:agent" element={<NeutralFeedback />} />
+      <Route path="/satisfied/:agent" element={<SatisfiedFeedback />} />
     </Routes>
   );
 }
