@@ -42,7 +42,7 @@ export function SurveyPreviewCard({ agentName, onClose }: Props) {
         <div className="flex items-center justify-between border-b border-gray-200 px-5 py-3">
           <div>
             <h2 className="text-sm font-semibold text-gray-900">
-              Survey Preview
+              Survey Preview - Copy the template below to paste via email
             </h2>
             <p className="mt-0.5 text-xs text-gray-500">
               {agentName}
