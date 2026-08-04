@@ -18,7 +18,7 @@ export function buildSurveyTemplate(agentName: string) {
         border="0"
       >
         <tr>
-          <td align="center">
+          <td align="center"> 
 
             <table
               role="presentation"
@@ -28,7 +28,7 @@ export function buildSurveyTemplate(agentName: string) {
               border="0"
               style="
                 max-width: 360px;
-                background: #ffffff;
+                background: #ffffff;  
                 border-radius: 8px;
               "
             >
