@@ -46,7 +46,7 @@ export function buildSurveyTemplate(agentName: string) {
                     font-weight: bold;
                     text-align: center;
                   ">
-                    How satisfied are you with ${agentName}'s service?
+                    How satisfied are you with CloudConsole and agent ${agentName}'s service?
                   </h2>
 
                   <table
