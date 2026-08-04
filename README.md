@@ -1,54 +1,18 @@
 # CSAT Feedback System
 # Live Site: https://csat-feedback-system.onrender.com 
 A public feedback capture flow triggered from Freshdesk emoji-rating emails.
+# Rating Template with specified agents
+<img width="1502" height="870" alt="image" src="https://github.com/user-attachments/assets/53cf0db7-10ad-4687-9363-34404cb16ef2" />
+<img width="627" height="503" alt="image" src="https://github.com/user-attachments/assets/6acbb761-94fa-45ca-926f-6ed63e927d28" />
 
-```
-Freshdesk email (5 emojis, each a link)
-        │  https://feedback.company.com/?ticket=12345&rating=5&subject=Cannot%20login
-        ▼
-feedback-website (React SPA)        →  reads ticket/rating/subject from the URL,
-                                        shows them read-only, collects free-text
-                                        + category checkboxes
-        │  POST /api/feedback
-        ▼
-backend (Express API)               →  validates (Zod) → sanitizes → inserts
-        │
-        ▼
-Neon Postgres — `feedback` table
-```
+# Form ( 3 ratings - Dispappointed, Neutral, Satisfied )
+<img width="1117" height="855" alt="image" src="https://github.com/user-attachments/assets/9a46796d-88db-40fc-83ec-c70530c57684" />
+<img width="1100" height="848" alt="image" src="https://github.com/user-attachments/assets/6eeafa46-363b-4da3-9ec2-f9204b222265" />
+
+<img width="1101" height="850" alt="image" src="https://github.com/user-attachments/assets/6b9861b6-ecce-4df7-a64a-b1c2b542b501" />
 
 
-## How the "prefill" flow works
 
-The Freshdesk email template links each emoji to the form site
-
-`rating` is baked into the URL per-emoji (1 for 😡 … 5 for 😄), and `subject`
-carries the ticket title straight from the email template — no extra API
-call is needed. `useTicketParams` reads all three query params once, on
-mount, and:
-
-- Rejects the page (shows `InvalidLinkPage`) if `ticket` or `rating` are
-  missing/malformed.
-- Passes `ticketId`, `rating`, and `subject` down as **props/read-only
-  display data only** — they are never wired into the React Hook Form
-  state, so there is no code path where they can be edited by the customer.
-
-## Database schema
-
-
-`connectNeon()` in `backend/src/config/db.ts` runs this on every boot; there
-is no separate migration step (same pattern as `CREATE TABLE IF NOT
-EXISTS` — safe to re-run).
-
-**Design decision:** `ticket_id` is `UNIQUE`. One rating per ticket. A
-second submission for the same ticket returns `409 Conflict` with a clear
-message instead of silently overwriting or duplicating rows. If your
-Freshdesk flow needs to allow re-rating (e.g. ticket reopened), drop the
-constraint and instead `UPSERT` (`ON CONFLICT (ticket_id) DO UPDATE`) in
-`feedback.repository.ts`.
-
-
-## Security measures in place
 
 rating/.env
 
