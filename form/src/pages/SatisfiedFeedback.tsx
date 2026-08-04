@@ -1,5 +1,5 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
-
+import { ENV } from "../lib/env.config";
 type Rating = "disappointed" | "neutral" | "satisfied";
 
 interface SatisfiedFeedbackProps {
@@ -40,8 +40,9 @@ export default function SatisfiedFeedback({
   const [searchParams] = useSearchParams();
   const agentName = searchParams.get("agent") || "";
 
-  const formSrc = `https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=N-0b_WRuKUCUri0p76P1ciMCgbEyRTZKn1onILstHuFUQ05TRklETVcyTU1GTDhHM0k5UFJNQ1E0Ry4u&rb172816ddc0e4f13af725c5872f51b91=${encodeURIComponent(agentName)}&r17761f2c6eaf42ab878983b1f29c8181=%22Satisfied%20%F0%9F%98%83%22`
-
+  const formSrc = ENV.FORM_URL
+    ? `${ENV.FORM_URL}&rb172816ddc0e4f13af725c5872f51b91=${encodeURIComponent(agentName)}&r17761f2c6eaf42ab878983b1f29c8181=${encodeURIComponent('"Satisfied 😃"')}`
+    : "";
   const handleNavigate = (rating: Rating) => {
     if (rating === activeRating) return;
     onNavigate?.(rating);
