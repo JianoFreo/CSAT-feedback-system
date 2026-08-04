@@ -50,12 +50,12 @@ constraint and instead `UPSERT` (`ON CONFLICT (ticket_id) DO UPDATE`) in
 
 ## Security measures in place
 
-web_forum/form/.env
+rating/.env
 
 ```ts
-VITE_DISAPPOINTED=yourprefilledform
-VITE_NEUTRAL=yourprefilledform
-VITE_SATISFIED=yourprefilledform
+VITE_SUPABASE_URL=serverless-db-url
+VITE_SUPABASE_PUBLISHABLE_KEY=public-anon-key
+VITE_WEB_FORM_URL=form-site-url
 ```
 
 | Concern | Mitigation |
