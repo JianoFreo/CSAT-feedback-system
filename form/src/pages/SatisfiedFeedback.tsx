@@ -1,5 +1,7 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ENV } from "../lib/env.config";
+import { MapPin, Contact, Phone } from "lucide-react";
+
 type Rating = "disappointed" | "neutral" | "satisfied";
 
 interface SatisfiedFeedbackProps {
@@ -9,31 +11,37 @@ interface SatisfiedFeedbackProps {
   formSrc?: string;
 }
 
-const NAV_ITEMS: { id: Rating; label: string; activeClasses: string; idleClasses: string }[] = [
+const NAV_ITEMS: {
+  id: Rating;
+  label: string;
+  activeClasses: string;
+  idleClasses: string;
+}[] = [
   {
     id: "disappointed",
     label: "Disappointed",
     activeClasses: "bg-rose-600 text-white",
-    idleClasses: "bg-white text-rose-700 border border-rose-200 hover:bg-rose-50",
+    idleClasses:
+      "bg-white text-rose-700 border border-rose-200 hover:bg-rose-50",
   },
   {
     id: "neutral",
     label: "Neutral",
     activeClasses: "bg-amber-600 text-white",
-    idleClasses: "bg-white text-amber-700 border border-amber-200 hover:bg-amber-50",
+    idleClasses:
+      "bg-white text-amber-700 border border-amber-200 hover:bg-amber-50",
   },
   {
     id: "satisfied",
     label: "Satisfied",
     activeClasses: "bg-emerald-600 text-white",
-    idleClasses: "bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50",
+    idleClasses:
+      "bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50",
   },
 ];
 
-
 export default function SatisfiedFeedback({
   onNavigate,
-
 }: SatisfiedFeedbackProps) {
   const navigate = useNavigate();
   const activeRating: Rating = "satisfied";
@@ -59,18 +67,26 @@ export default function SatisfiedFeedback({
               +
             </div>
             <div>
-              <strong className="block text-sm tracking-wide text-emerald-950">Customer Feedback</strong>
+              <strong className="block text-sm tracking-wide text-emerald-950">
+                Customer Feedback
+              </strong>
             </div>
           </div>
 
-          <nav aria-label="Satisfaction choices" className="flex flex-wrap justify-start gap-2 sm:justify-end">
+          <nav
+            aria-label="Satisfaction choices"
+            className="flex flex-wrap justify-start gap-2 sm:justify-end"
+          >
             {NAV_ITEMS.map((item) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => handleNavigate(item.id)}
-                className={`rounded-md px-4 py-2 text-sm font-semibold transition ${item.id === activeRating ? item.activeClasses : item.idleClasses
-                  }`}
+                className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
+                  item.id === activeRating
+                    ? item.activeClasses
+                    : item.idleClasses
+                }`}
               >
                 {item.label}
               </button>
@@ -95,12 +111,41 @@ export default function SatisfiedFeedback({
             </h1>
 
             <p className="mt-3 max-w-[38ch] text-base leading-relaxed text-emerald-800/70">
-              This page feels lighter and more optimistic, while still collecting useful details
-              about what made the experience work well.
+              This page feels lighter and more optimistic, while still
+              collecting useful details about what made the experience work
+              well.
             </p>
 
             <div className="mt-6 grid gap-3">
-              <img src="CC-contactdetails.png" alt="Contact Details" />
+              <div>
+                <img
+                  src="CC-form-logo.png"
+                  alt="Contact Details"
+                  className="w-70 mb-10 mt-10"
+                />
+
+                <div className="flex flex-col gap-2">
+                  {/* Contact Details */}
+                  <div className="flex items-center gap-2">
+                    <Contact className="w-5 h-5 text-gray-600 shrink-0" />
+                    <p className="text-xl font-bold">Contact Details</p>
+                  </div>
+
+                  {/* Address */}
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-gray-600 shrink-0" />
+                    <p className="text-xl">
+                      25D Zeta Bldg. Salcedo St. Makati City MNL PH
+                    </p>
+                  </div>
+
+                  {/* Phone */}
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-5 h-5 text-gray-600 shrink-0" />
+                    <p className="text-xl">+63 282312520</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </article>
 
@@ -109,8 +154,6 @@ export default function SatisfiedFeedback({
             aria-label="Feedback form"
             className="rounded-md border border-emerald-200 bg-white p-3.5 shadow-sm"
           >
-
-
             <iframe
               src={formSrc}
               title="Customer feedback form - satisfied"

@@ -1,5 +1,7 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ENV } from "../lib/env.config";
+import { MapPin, Contact, Phone } from "lucide-react";
+
 
 type Rating = "disappointed" | "neutral" | "satisfied";
 
@@ -100,8 +102,35 @@ export default function NeutralFeedback({
             </p>
 
             <div className="mt-6 grid gap-3">
-              <img src="CC-contactdetails.png" alt="Contact Details" />
+              <div>
+                <img
+                  src="CC-form-logo.png"
+                  alt="Contact Details"
+                  className="w-70 mb-10 mt-10"
+                />
 
+                <div className="flex flex-col gap-2">
+                  {/* Contact Details */}
+                  <div className="flex items-center gap-2">
+                    <Contact className="w-5 h-5 text-gray-600 shrink-0" />
+                    <p className="text-xl font-bold">Contact Details</p>
+                  </div>
+
+                  {/* Address */}
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-gray-600 shrink-0" />
+                    <p className="text-xl">
+                      25D Zeta Bldg. Salcedo St. Makati City MNL PH
+                    </p>
+                  </div>
+
+                  {/* Phone */}
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-5 h-5 text-gray-600 shrink-0" />
+                    <p className="text-xl">+63 282312520</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </article>
 
