@@ -98,10 +98,6 @@ export default function SatisfiedFeedback({
               Awesome
             </span>
 
-            <div className="mb-4 grid h-20 w-20 place-items-center rounded-md bg-[#B4E5DA] text-4xl">
-              😄
-            </div>
-
             <h1 className="text-4xl font-bold leading-[0.98] tracking-tight text-emerald-950 sm:text-5xl">
               Great to hear we were on track.
             </h1>

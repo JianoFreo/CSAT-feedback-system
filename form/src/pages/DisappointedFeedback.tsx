@@ -95,10 +95,6 @@ function DisappointedFeedback({ onNavigate }: DisappointedFeedbackProps) {
               Not Good
             </span>
 
-            <div className="mb-4 grid h-20 w-20 place-items-center rounded-md bg-[#FFD0D6] text-4xl">
-              😞
-            </div>
-
             <h1 className="text-4xl font-bold leading-[0.98] tracking-tight text-rose-950 sm:text-5xl">
               We know this missed the mark.
             </h1>

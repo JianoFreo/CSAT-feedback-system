@@ -86,10 +86,6 @@ export default function NeutralFeedback({
               Just Okay
             </span>
 
-            <div className="mb-4 grid h-20 w-20 place-items-center rounded-md bg-[#FDDBB5] text-4xl">
-              😐
-            </div>
-
             <h1 className="text-4xl font-bold leading-[0.98] tracking-tight text-amber-950 sm:text-5xl">
               Thanks for keeping us balanced.
             </h1>
