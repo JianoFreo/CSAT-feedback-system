@@ -1,7 +1,9 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ENV } from "../lib/env.config";
 import { MapPin, Contact, Phone } from "lucide-react";
-import { RATING_PATH, type Rating } from "../lib/ratingPaths";
+
+
+type Rating = "disappointed" | "neutral" | "satisfied";
 
 interface NeutralFeedbackProps {
   /** Called when the person switches to a different rating tab. */
