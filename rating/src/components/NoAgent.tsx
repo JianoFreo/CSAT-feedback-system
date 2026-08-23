@@ -46,19 +46,16 @@ function NoAgent() {
             How satisfied are you with CloudConsole&apos;s service?
           </p>
 
-          <div className="mt-4 flex justify-center gap-4">
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-2xl">🙁</span>
-              <span className="text-[10px] text-gray-500">Disappointed</span>
-            </div>
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-2xl">😐</span>
-              <span className="text-[10px] text-gray-500">Neutral</span>
-            </div>
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-2xl">😃</span>
-              <span className="text-[10px] text-gray-500">Satisfied</span>
-            </div>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            <span className="rounded-full bg-[#B4E5DA] px-4 py-2 text-xs font-bold text-[#14355D]">
+              Awesome
+            </span>
+            <span className="rounded-full bg-[#FDDBB5] px-4 py-2 text-xs font-bold text-[#14355D]">
+              Just Okay
+            </span>
+            <span className="rounded-full bg-[#FFD0D6] px-4 py-2 text-xs font-bold text-[#14355D]">
+              Not Good
+            </span>
           </div>
         </div>
       )}

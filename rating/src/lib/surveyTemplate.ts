@@ -26,28 +26,22 @@ export function buildSurveyTemplate(agentName: string) {
 
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center">
                     <tr>
-                      <td align="center" valign="top" style="padding:0 9px;">
-                        <a href="${FEEDBACK_BASE}/disappointed${query}" style="text-decoration:none;font-size:32px;line-height:1;">🙁</a>
-
-                        <div style="margin-top:6px;font-size:10px;color:#666666;text-align:center;">
-                          Disappointed
-                        </div>
+                      <td align="center" valign="middle" style="padding:0 6px;">
+                        <a href="${FEEDBACK_BASE}/awesome${query}" style="display:inline-block;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;color:#14355D;background-color:#B4E5DA;border-radius:999px;padding:10px 18px;white-space:nowrap;">
+                          Awesome
+                        </a>
                       </td>
 
-                      <td align="center" valign="top" style="padding:0 9px;">
-                        <a href="${FEEDBACK_BASE}/neutral${query}" style="text-decoration:none;font-size:32px;line-height:1;">😐</a>
-
-                        <div style="margin-top:6px;font-size:10px;color:#666666;text-align:center;">
-                          Neutral
-                        </div>
+                      <td align="center" valign="middle" style="padding:0 6px;">
+                        <a href="${FEEDBACK_BASE}/just-okay${query}" style="display:inline-block;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;color:#14355D;background-color:#FDDBB5;border-radius:999px;padding:10px 18px;white-space:nowrap;">
+                          Just Okay
+                        </a>
                       </td>
 
-                      <td align="center" valign="top" style="padding:0 9px;">
-                        <a href="${FEEDBACK_BASE}/satisfied${query}" style="text-decoration:none;font-size:32px;line-height:1;">😃</a>
-
-                        <div style="margin-top:6px;font-size:10px;color:#666666;text-align:center;">
-                          Satisfied
-                        </div>
+                      <td align="center" valign="middle" style="padding:0 6px;">
+                        <a href="${FEEDBACK_BASE}/not-good${query}" style="display:inline-block;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;color:#14355D;background-color:#FFD0D6;border-radius:999px;padding:10px 18px;white-space:nowrap;">
+                          Not Good
+                        </a>
                       </td>
                     </tr>
                   </table>
