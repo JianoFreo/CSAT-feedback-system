@@ -1,8 +1,7 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ENV } from "../lib/env.config";
 import { MapPin, Contact, Phone } from "lucide-react";
-
-type Rating = "disappointed" | "neutral" | "satisfied";
+import { RATING_PATH, type Rating } from "../lib/ratingPaths";
 
 interface SatisfiedFeedbackProps {
   /** Called when the person switches to a different rating tab. */
@@ -18,25 +17,22 @@ const NAV_ITEMS: {
   idleClasses: string;
 }[] = [
   {
-    id: "disappointed",
-    label: "Disappointed",
-    activeClasses: "bg-rose-600 text-white",
-    idleClasses:
-      "bg-white text-rose-700 border border-rose-200 hover:bg-rose-50",
+    id: "satisfied",
+    label: "Awesome",
+    activeClasses: "bg-[#B4E5DA] text-[#14355D] ring-2 ring-[#5FBBA4]",
+    idleClasses: "bg-[#B4E5DA]/50 text-[#14355D]/70 hover:bg-[#B4E5DA]",
   },
   {
     id: "neutral",
-    label: "Neutral",
-    activeClasses: "bg-amber-600 text-white",
-    idleClasses:
-      "bg-white text-amber-700 border border-amber-200 hover:bg-amber-50",
+    label: "Just Okay",
+    activeClasses: "bg-[#FDDBB5] text-[#14355D] ring-2 ring-[#E8A85C]",
+    idleClasses: "bg-[#FDDBB5]/50 text-[#14355D]/70 hover:bg-[#FDDBB5]",
   },
   {
-    id: "satisfied",
-    label: "Satisfied",
-    activeClasses: "bg-emerald-600 text-white",
-    idleClasses:
-      "bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50",
+    id: "disappointed",
+    label: "Not Good",
+    activeClasses: "bg-[#FFD0D6] text-[#14355D] ring-2 ring-[#F08CA0]",
+    idleClasses: "bg-[#FFD0D6]/50 text-[#14355D]/70 hover:bg-[#FFD0D6]",
   },
 ];
 
@@ -82,7 +78,7 @@ export default function SatisfiedFeedback({
                 key={item.id}
                 type="button"
                 onClick={() => handleNavigate(item.id)}
-                className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
+                className={`rounded-full px-4 py-2 text-sm font-bold transition ${
                   item.id === activeRating
                     ? item.activeClasses
                     : item.idleClasses
