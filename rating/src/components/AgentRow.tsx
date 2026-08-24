@@ -14,7 +14,7 @@ export function AgentRow({ agent, isDeleting, onDelete }: Props) {
   return (
     <div className="flex items-center justify-between px-4 py-3">
       <div>
-        <p className="font-medium text-gray-900">{agent.agents}</p>
+        <p className="font-medium text-gray-900">{agent.name}</p>
         <p className="text-xs text-gray-400">
           Added {new Date(agent.created_at).toLocaleString()}
         </p>
@@ -42,7 +42,7 @@ export function AgentRow({ agent, isDeleting, onDelete }: Props) {
 
       {showPreview && (
         <SurveyPreviewCard
-          agentName={agent.agents}
+          agentName={agent.name}
           onClose={() => setShowPreview(false)}
         />
       )}

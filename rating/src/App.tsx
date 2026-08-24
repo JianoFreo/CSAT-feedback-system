@@ -20,7 +20,7 @@ function App() {
   const [search, setSearch] = useState("");
 
   const filteredAgents = agents.filter((agent) =>
-    agent.agents.toLowerCase().includes(search.toLowerCase())
+    agent.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (

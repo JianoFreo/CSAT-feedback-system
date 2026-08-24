@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabase";
+import { api } from "../lib/api";
 
 export type Agent = {
   id: number;
   created_at: string;
-  agents: string;
+  name: string;
 };
 
 export function useAgents() {
@@ -19,18 +19,14 @@ export function useAgents() {
       setIsLoading(true);
       setError(null);
 
-      const { data, error } = await supabase
-        .from("agents")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (error) {
-        setError(error.message);
-      } else {
-        setAgents(data ?? []);
+      try {
+        const { data } = await api.get<{ agents: Agent[] }>("/api/agents");
+        setAgents(data.agents);
+      } catch (err) {
+        setError(extractErrorMessage(err));
+      } finally {
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
     };
 
     getAgents();
@@ -43,35 +39,25 @@ export function useAgents() {
     setIsAdding(true);
     setError(null);
 
-    const { data, error } = await supabase
-      .from("agents")
-      .insert({ agents: value })
-      .select()
-      .single();
-
-    if (error) {
-      setError(error.message);
-    } else if (data) {
-      setAgents((current) => [data, ...current]);
+    try {
+      const { data } = await api.post<{ agent: Agent }>("/api/agents", { name: value });
+      setAgents((current) => [data.agent, ...current]);
+    } catch (err) {
+      setError(extractErrorMessage(err));
+    } finally {
+      setIsAdding(false);
     }
-
-    setIsAdding(false);
   };
 
   const deleteAgent = async (id: number) => {
+    setIsDeleting(true);
+    setError(null);
+
     try {
-      setIsDeleting(true);
-      setError(null);
-
-      const { error } = await supabase.from("agents").delete().eq("id", id);
-
-      if (error) {
-        setError(error.message);
-      } else {
-        setAgents((current) => current.filter((agent) => agent.id !== id));
-      }
-    } catch {
-      setError("An unexpected error occurred while deleting the agent.");
+      await api.delete(`/api/agents/${id}`);
+      setAgents((current) => current.filter((agent) => agent.id !== id));
+    } catch (err) {
+      setError(extractErrorMessage(err));
     } finally {
       setIsDeleting(false);
     }
@@ -86,4 +72,16 @@ export function useAgents() {
     addAgent,
     deleteAgent,
   };
+}
+
+function extractErrorMessage(err: unknown): string {
+  if (
+    typeof err === "object" &&
+    err !== null &&
+    "response" in err &&
+    typeof (err as { response?: { data?: { error?: string } } }).response?.data?.error === "string"
+  ) {
+    return (err as { response: { data: { error: string } } }).response.data.error;
+  }
+  return "An unexpected error occurred.";
 }
