@@ -14,13 +14,43 @@ A public feedback capture flow triggered from Freshdesk emoji-rating emails.
 
 
 
-rating/.env
+## Stack
 
+PERN: **P**ostgres (Neon serverless) + **E**xpress + **R**eact + **N**ode.
+
+```
+rating/ (frontend)  --axios-->  backend/ (Express API)  --sql``-->  Neon Postgres
+```
+
+## Local dev
+
+```bash
+# from repo root
+npm run dev              # -> npm run dev --prefix backend (nodemon + tsx)
+
+# frontend dev server (separate terminal, for HMR)
+cd rating && npm run dev
+```
+
+`backend/.env` (see `backend/.env.example`):
+```
+DATABASE_URL=your-neon-connection-string
+NODE_ENV=development
+PORT=5000
+FRONTEND_ORIGINS=http://localhost:5173
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX=20
+```
+
+`rating/.env`:
 ```ts
-VITE_SUPABASE_URL=serverless-db-url
-VITE_SUPABASE_PUBLISHABLE_KEY=public-anon-key
+VITE_API_BASE_URL=http://localhost:5000
 VITE_WEB_FORM_URL=form-site-url
 ```
+
+`connectNeon()` in `backend/src/config/db.ts` runs `CREATE TABLE IF NOT EXISTS`
+on server boot — starting the backend against a fresh Neon database is
+sufficient to provision the schema; there's no separate migration/seed step.
 
 | Concern | Mitigation |
 |---|---|
