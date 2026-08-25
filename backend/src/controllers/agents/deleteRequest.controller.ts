@@ -1,6 +1,7 @@
 // src/controllers/agents/deleteRequest.controller.ts
 import type { Request, Response } from "express";
 import { sql } from "../../config/db.js";
+import { syncAgentsToExcel } from "../../utils/agentsExcelSync.js";
 
 export async function deleteAgent(req: Request, res: Response) {
   const id = Number(req.params.id);
@@ -23,6 +24,9 @@ export async function deleteAgent(req: Request, res: Response) {
     }
 
     res.status(200).json({ message: "Agent deleted" });
+
+    // Fire-and-forget: refresh the Excel mirror after responding.
+    void syncAgentsToExcel();
   } catch (err) {
     console.error("deleteAgent error:", err);
     res.status(500).json({ error: "Failed to delete agent" });

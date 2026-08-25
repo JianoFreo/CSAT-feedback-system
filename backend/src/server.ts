@@ -6,6 +6,7 @@ import { ENV } from "./config/env.js";
 import { connectNeon } from "./config/db.js";
 import agentsRoute from "./routes/agents.route.js";
 import feedbackRoute from "./routes/feedback.route.js";
+import { syncAgentsToExcel } from "./utils/agentsExcelSync.js";
 
 const app = express();
 
@@ -31,7 +32,10 @@ app.get("/", (_req, res) => {
 const PORT = Number(ENV.PORT);
 
 connectNeon()
-  .then(() => {
+  .then(async () => {
+    // Make sure the Excel mirror exists and is current as soon as the
+    // server boots, not just after the next add/delete.
+    await syncAgentsToExcel();
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT} (${ENV.NODE_ENV})`);
     });
