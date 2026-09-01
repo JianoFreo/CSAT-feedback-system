@@ -28,7 +28,7 @@ export function buildSurveyTemplate(agentName: string) {
                     <tr>
                       <td align="center" valign="middle" style="padding:0 6px;">
                         <a href="${FEEDBACK_BASE}/awesome${query}" style="display:inline-block;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;color:#14355D;background-color:#B4E5DA;border-radius:999px;padding:10px 18px;white-space:nowrap;">
-                          Awesome
+                          Very Good
                         </a>
                       </td>
 

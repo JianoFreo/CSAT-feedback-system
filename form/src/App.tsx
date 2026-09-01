@@ -1,6 +1,6 @@
-import DisappointedFeedback from "./pages/DisappointedFeedback";  
-import NeutralFeedback from "./pages/NeutralFeedback";
-import SatisfiedFeedback from "./pages/SatisfiedFeedback";
+import NotGoodFeedback from "./pages/NotGoodFeedback";  
+import JustOkayFeedback from "./pages/JustOkayFeedback";
+import VeryGoodFeedback from "./pages/VeryGoodFeedback";
 import Access from "./pages/Access";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
@@ -14,9 +14,9 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Access />} />
-      <Route path="/not-good" element={<DisappointedFeedback />} />
-      <Route path="/just-okay" element={<NeutralFeedback />} />
-      <Route path="/awesome" element={<SatisfiedFeedback />} />
+      <Route path="/not-good" element={<NotGoodFeedback />} />
+      <Route path="/just-okay" element={<JustOkayFeedback />} />
+      <Route path="/awesome" element={<VeryGoodFeedback />} />
 
       {/* Legacy paths kept so previously sent survey emails keep working */}
       <Route path="/disappointed" element={<LegacyRedirect to="/not-good" />} />

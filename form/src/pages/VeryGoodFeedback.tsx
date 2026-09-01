@@ -3,10 +3,10 @@ import { ENV } from "../lib/env.config";
 import { MapPin, Contact, Phone } from "lucide-react";
 import { RATING_PATH, type Rating } from "../lib/ratingPaths";
 
-interface DisappointedFeedbackProps {
+interface VeryGoodFeedbackProps {
   /** Called when the person switches to a different rating tab. */
   onNavigate?: (rating: Rating) => void;
-  /** The Microsoft Forms embed URL for the "disappointed" branch. */
+  /** The Microsoft Forms embed URL for the "satisfied" branch. */
   formSrc?: string;
 }
 
@@ -18,7 +18,7 @@ const NAV_ITEMS: {
 }[] = [
   {
     id: "satisfied",
-    label: "Awesome",
+    label: "Very Good",
     activeClasses: "bg-[#B4E5DA] text-[#14355D] ring-2 ring-[#5FBBA4]",
     idleClasses: "bg-[#B4E5DA]/50 text-[#14355D]/70 hover:bg-[#B4E5DA]",
   },
@@ -36,31 +36,34 @@ const NAV_ITEMS: {
   },
 ];
 
-function DisappointedFeedback({ onNavigate }: DisappointedFeedbackProps) {
+export default function VeryGoodFeedback({
+  onNavigate,
+}: VeryGoodFeedbackProps) {
   const navigate = useNavigate();
-  const activeRating: Rating = "disappointed";
-
+  const activeRating: Rating = "satisfied";
   const [searchParams] = useSearchParams();
   const agentName = searchParams.get("agent") || "";
+
+  const formSrc = ENV.FORM_URL
+    ? `${ENV.FORM_URL}&rb172816ddc0e4f13af725c5872f51b91=${encodeURIComponent(agentName)}&r17761f2c6eaf42ab878983b1f29c8181=${encodeURIComponent('"Very Good"')}`
+    : "";
   const handleNavigate = (rating: Rating) => {
     if (rating === activeRating) return;
     onNavigate?.(rating);
     navigate(`/${RATING_PATH[rating]}${searchParams.toString() ? `?${searchParams.toString()}` : ""}`);
   };
-  const formSrc = ENV.FORM_URL
-    ? `${ENV.FORM_URL}&rb172816ddc0e4f13af725c5872f51b91=${encodeURIComponent(agentName)}&r17761f2c6eaf42ab878983b1f29c8181=${encodeURIComponent('"Not Good"')}`
-    : "";
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFF0F2] via-[#FFF7F8] to-[#FFDDE2]">
+    <div className="min-h-screen bg-gradient-to-br from-[#EAF8F3] via-[#F3FBF8] to-[#DCF1E9]">
       <main className="mx-auto w-[calc(100%-2rem)] max-w-6xl py-8 pb-10">
         {/* Topbar */}
-        <header className="mb-6 flex flex-col gap-4 rounded-md border border-rose-200 bg-white p-3 sm:flex-row sm:items-center sm:justify-between">
+        <header className="mb-6 flex flex-col gap-4 rounded-md border border-emerald-200 bg-white p-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <div className="grid h-11 w-11 place-items-center rounded-md bg-[#F08CA0] text-lg font-bold text-white">
-              !
+            <div className="grid h-11 w-11 place-items-center rounded-md bg-[#5FBBA4] text-lg font-bold text-white">
+              +
             </div>
             <div>
-              <strong className="block text-sm tracking-wide text-rose-950">
+              <strong className="block text-sm tracking-wide text-emerald-950">
                 Customer Feedback
               </strong>
             </div>
@@ -90,18 +93,19 @@ function DisappointedFeedback({ onNavigate }: DisappointedFeedbackProps) {
         {/* Hero */}
         <section className="grid grid-cols-1 gap-5 lg:grid-cols-[0.95fr_1.05fr]">
           {/* Summary panel */}
-          <article className="rounded-md border border-rose-200 bg-white p-7 shadow-sm">
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#FFD0D6] px-3 py-2 text-xs font-bold uppercase tracking-wide text-[#14355D]">
-              Not Good
+          <article className="rounded-md border border-emerald-200 bg-white p-7 shadow-sm">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#B4E5DA] px-3 py-2 text-xs font-bold uppercase tracking-wide text-[#14355D]">
+              Very Good
             </span>
 
-            <h1 className="text-4xl font-bold leading-[0.98] tracking-tight text-rose-950 sm:text-5xl">
-              We know this missed the mark.
+            <h1 className="text-4xl font-bold leading-[0.98] tracking-tight text-emerald-950 sm:text-5xl">
+              Great to hear we were on track.
             </h1>
 
-            <p className="mt-3 max-w-[38ch] text-base leading-relaxed text-rose-800/70">
-              Tell us what went wrong so we can fix the issue, follow up
-              properly, and make the next experience better.
+            <p className="mt-3 max-w-[38ch] text-base leading-relaxed text-emerald-800/70">
+              This page feels lighter and more optimistic, while still
+              collecting useful details about what made the experience work
+              well.
             </p>
 
             <div className="mt-6 grid gap-3">
@@ -140,11 +144,11 @@ function DisappointedFeedback({ onNavigate }: DisappointedFeedbackProps) {
           {/* Form panel */}
           <section
             aria-label="Feedback form"
-            className="rounded-md border border-rose-200 bg-white p-3.5 shadow-sm"
+            className="rounded-md border border-emerald-200 bg-white p-3.5 shadow-sm"
           >
             <iframe
               src={formSrc}
-              title="Customer feedback form - disappointed"
+              title="Customer feedback form - satisfied"
               loading="lazy"
               referrerPolicy="no-referrer"
               allowFullScreen
@@ -156,5 +160,3 @@ function DisappointedFeedback({ onNavigate }: DisappointedFeedbackProps) {
     </div>
   );
 }
-
-export default DisappointedFeedback;

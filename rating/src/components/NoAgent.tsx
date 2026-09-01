@@ -48,7 +48,7 @@ function NoAgent() {
 
           <div className="mt-4 flex flex-wrap justify-center gap-2">
             <span className="rounded-full bg-[#B4E5DA] px-4 py-2 text-xs font-bold text-[#14355D]">
-              Awesome
+              Very Good
             </span>
             <span className="rounded-full bg-[#FDDBB5] px-4 py-2 text-xs font-bold text-[#14355D]">
               Just Okay
