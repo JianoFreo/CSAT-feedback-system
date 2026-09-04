@@ -1,10 +1,14 @@
 // src/config/db.ts
-import { neon } from "@neondatabase/serverless";
+import postgres from "postgres";
 import { ENV } from "./env.js";
+
+export const sql = postgres(ENV.DATABASE_URL, {
+  ssl: ENV.DATABASE_SSL, // self-hosted Postgres has no TLS by default
+});
 
 // Tagged-template sql client. Every query in this codebase goes through this
 // (interpolated ${} params, never string concatenation) to avoid SQL injection.
-export const sql = neon(ENV.DATABASE_URL);
+
 
 // This file is the single source of truth for the schema — there are no
 // migration files. Run connectNeon() once on server boot; CREATE TABLE IF

@@ -19,6 +19,9 @@ export const ENV = {
     .split(",")
     .map((origin) => origin.trim())
     .filter(Boolean),
-  RATE_LIMIT_WINDOW_MS: Number(process.env.RATE_LIMIT_WINDOW_MS ?? 15 * 60 * 1000),
+  RATE_LIMIT_WINDOW_MS: Number(
+    process.env.RATE_LIMIT_WINDOW_MS ?? 15 * 60 * 1000,
+  ),
   RATE_LIMIT_MAX: Number(process.env.RATE_LIMIT_MAX ?? 20),
+  DATABASE_SSL: process.env.DATABASE_SSL === "true",
 };
