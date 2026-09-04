@@ -13,6 +13,16 @@ const app = express();
 // of the proxy's own IP — feedback controller relies on this for req.ip.
 app.set("trust proxy", 1);
 
+// Chrome's Private Network Access policy blocks public sites (like Render)
+// from silently reaching private-network servers (like this one) unless we
+// explicitly opt in on the preflight response. Must run before cors().
+app.use((req, res, next) => {
+  if (req.headers["access-control-request-private-network"]) {
+    res.setHeader("Access-Control-Allow-Private-Network", "true");
+  }
+  next();
+});
+
 app.use(helmet());
 app.use(
   cors({
