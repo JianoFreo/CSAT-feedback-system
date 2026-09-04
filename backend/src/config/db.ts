@@ -1,18 +1,22 @@
 // src/config/db.ts
-import postgres from "postgres";
+
 import { ENV } from "./env.js";
 
-export const sql = postgres(ENV.DATABASE_URL, {
-  ssl: ENV.DATABASE_SSL, // self-hosted Postgres has no TLS by default
-});
+let sql: any;
 
-// Tagged-template sql client. Every query in this codebase goes through this
-// (interpolated ${} params, never string concatenation) to avoid SQL injection.
+if (ENV.RENDER_DEPLOYMENT) {
+  const { neon } = await import("@neondatabase/serverless");
+  sql = neon(ENV.DATABASE_URL);
+} else {
+  const { default: postgres } = await import("postgres");
 
+  sql = postgres(ENV.DATABASE_URL, {
+    ssl: ENV.DATABASE_SSL,
+  });
+}
 
-// This file is the single source of truth for the schema — there are no
-// migration files. Run connectNeon() once on server boot; CREATE TABLE IF
-// NOT EXISTS makes it safe to run against an already-provisioned database.
+export { sql };
+
 export async function connectNeon() {
   await sql`
     CREATE TABLE IF NOT EXISTS agents (
@@ -34,5 +38,5 @@ export async function connectNeon() {
     )
   `;
 
-  console.log("Connected to Neon Postgres, schema is up to date.");
+  console.log("Database connected, schema is up to date.");
 }

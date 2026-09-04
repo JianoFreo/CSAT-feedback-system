@@ -24,4 +24,5 @@ export const ENV = {
   ),
   RATE_LIMIT_MAX: Number(process.env.RATE_LIMIT_MAX ?? 20),
   DATABASE_SSL: process.env.DATABASE_SSL === "true",
+  RENDER_DEPLOYMENT: process.env.RENDER_DEPLOYMENT === "true",
 };
