@@ -10,7 +10,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     # Database remains private.
-    # No ports section.
+    # No ports: section.
 
   backend:
     build: ./backend
@@ -32,8 +32,7 @@ services:
     restart: unless-stopped
     depends_on:
       - backend
-    entrypoint: ["ngrok"]
-    command: ["http", "backend:5000"]
+    command: http backend:5000
     environment:
       NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
 
