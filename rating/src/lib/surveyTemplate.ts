@@ -9,7 +9,7 @@ export function buildSurveyTemplate(agentName: string) {
 
   const heading = isGeneral
     ? "How satisfied are you with CloudConsole's service?"
-    : `How satisfied are you with CloudConsole and ${trimmedAgent}'s service?`;
+    : `How satisfied are you with ${trimmedAgent}'s service?`;
 
   // Keep HTML tag attributes on a single line for Outlook compatibility.
   return `
