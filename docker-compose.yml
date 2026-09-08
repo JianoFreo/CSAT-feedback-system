@@ -35,6 +35,5 @@ services:
     command: http backend:5000
     environment:
       NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
-
 volumes:
   db_data:
