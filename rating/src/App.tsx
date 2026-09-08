@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+
 import { useAgents } from "./hooks/useAgents";
 import { AddAgentForm } from "./components/AddAgentForm";
 import { SearchBar } from "./components/SearchBar";
@@ -25,6 +26,8 @@ function App() {
   const [sortDirection, setSortDirection] =
     useState<SortDirection>("asc");
 
+  const [sortOpen, setSortOpen] = useState(false);
+
   const filteredAgents = useMemo(
     () =>
       agents.filter((agent) =>
@@ -47,7 +50,9 @@ function App() {
       return aTime - bTime;
     });
 
-    return sortDirection === "asc" ? sorted : sorted.reverse();
+    return sortDirection === "asc"
+      ? sorted
+      : sorted.reverse();
   }, [filteredAgents, sortBy, sortDirection]);
 
   return (
@@ -78,67 +83,139 @@ function App() {
             </div>
 
             {/* Search and Sorting */}
-            <div className="mb-6 rounded-lg border border-gray-200 bg-gray-50 p-4">
+            <div className="mb-6 flex items-center gap-3">
 
               {/* Search */}
-              <div className="mb-4">
+              <div className="min-w-0 flex-1">
                 <SearchBar
                   value={search}
                   onChange={setSearch}
                 />
               </div>
 
-              {/* Sorting */}
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
+              {/* Sort */}
+              <div className="relative shrink-0">
 
-                {/* Sort By */}
-                <label className="flex-1 text-sm text-gray-600">
-                  <span className="mb-1.5 block font-medium">
-                    Sort by
+                {/* Sort Button */}
+                <button
+                  type="button"
+                  onClick={() =>
+                    setSortOpen((prev) => !prev)
+                  }
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 bg-white text-gray-600 transition hover:bg-gray-50 hover:text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                  aria-label="Sort agents"
+                  aria-expanded={sortOpen}
+                >
+                  <span className="text-lg leading-none">
+                    ⇅
                   </span>
+                </button>
 
-                  <select
-                    value={sortBy}
-                    onChange={(e) =>
-                      setSortBy(e.target.value as SortBy)
-                    }
-                    className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-                  >
-                    <option value="name">
-                      Name
-                    </option>
+                {/* Dropdown */}
+                {sortOpen && (
+                  <div className="absolute right-0 z-50 mt-2 w-64 rounded-lg border border-gray-200 bg-white p-3 shadow-lg">
 
-                    <option value="created_at">
-                      Date added
-                    </option>
-                  </select>
-                </label>
+                    {/* Sort By */}
+                    <div>
+                      <p className="mb-2 px-2 text-xs font-semibold uppercase tracking-wide text-gray-400">
+                        Sort by
+                      </p>
 
-                {/* Order */}
-                <label className="flex-1 text-sm text-gray-600 sm:max-w-[220px]">
-                  <span className="mb-1.5 block font-medium">
-                    Order
-                  </span>
+                      {/* Name */}
+                      <button
+                        type="button"
+                        onClick={() => setSortBy("name")}
+                        className="flex w-full items-center justify-between rounded-md px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50"
+                      >
+                        <span>Name</span>
 
-                  <select
-                    value={sortDirection}
-                    onChange={(e) =>
-                      setSortDirection(
-                        e.target.value as SortDirection
-                      )
-                    }
-                    className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-                  >
-                    <option value="asc">
-                      Ascending
-                    </option>
+                        {sortBy === "name" && (
+                          <span className="text-blue-500">
+                            ✓
+                          </span>
+                        )}
+                      </button>
 
-                    <option value="desc">
-                      Descending
-                    </option>
-                  </select>
-                </label>
+                      {/* Date added */}
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setSortBy("created_at")
+                        }
+                        className="flex w-full items-center justify-between rounded-md px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50"
+                      >
+                        <span>Date added</span>
 
+                        {sortBy === "created_at" && (
+                          <span className="text-blue-500">
+                            ✓
+                          </span>
+                        )}
+                      </button>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="my-3 border-t border-gray-100" />
+
+                    {/* Order */}
+                    <div>
+                      <p className="mb-2 px-2 text-xs font-semibold uppercase tracking-wide text-gray-400">
+                        Order
+                      </p>
+
+                      {/* Ascending */}
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setSortDirection("asc")
+                        }
+                        className="flex w-full items-center justify-between rounded-md px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="text-base">
+                            ↑
+                          </span>
+
+                          <span>
+                            Ascending
+                          </span>
+                        </div>
+
+                        {sortDirection === "asc" && (
+                          <span className="text-blue-500">
+                            ✓
+                          </span>
+                        )}
+                      </button>
+
+                      {/* Descending */}
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setSortDirection("desc")
+                        }
+                        className="flex w-full items-center justify-between rounded-md px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="text-base">
+                            ↓
+                          </span>
+
+                          <span>
+                            Descending
+                          </span>
+                        </div>
+
+                        {sortDirection === "desc" && (
+                          <span className="text-blue-500">
+                            ✓
+                          </span>
+                        )}
+                      </button>
+                    </div>
+
+                  </div>
+                )}
               </div>
             </div>
 
