@@ -33,6 +33,7 @@ app.use(express.json({ limit: "10kb" }));
 
 app.use("/api/agents", agentsRoute);
 app.use("/api/feedback", feedbackRoute);
+app.use("/api/health", healthCheckRoute);
 
 app.get("/", (_req, res) => {
   res.status(200).json({ message: "CSAT feedback API is running" });
