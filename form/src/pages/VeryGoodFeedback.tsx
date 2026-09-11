@@ -43,9 +43,10 @@ export default function VeryGoodFeedback({
   const activeRating: Rating = "satisfied";
   const [searchParams] = useSearchParams();
   const agentName = searchParams.get("agent") || "";
+  const ticketID = searchParams.get("ticketID") || "";
 
   const formSrc = ENV.FORM_URL
-    ? `${ENV.FORM_URL}&rb172816ddc0e4f13af725c5872f51b91=${encodeURIComponent(agentName)}&r17761f2c6eaf42ab878983b1f29c8181=${encodeURIComponent('"Very Good"')}`
+    ? `${ENV.FORM_URL}&rb172816ddc0e4f13af725c5872f51b91=${encodeURIComponent(agentName)}&r17761f2c6eaf42ab878983b1f29c8181=${encodeURIComponent('"Very Good"')}${ticketID ? `&r27ae5c54cdc849659c664adea8b9c684=${encodeURIComponent(ticketID)}` : ""}`
     : "";
   const handleNavigate = (rating: Rating) => {
     if (rating === activeRating) return;
