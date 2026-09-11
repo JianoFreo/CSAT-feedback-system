@@ -32,6 +32,6 @@ services:
     restart: unless-stopped
     depends_on:
       - backend
-    command: tunnel --no-autoupdate run --token ${TUNNEL_TOKEN}
+    command: tunnel --no-autoupdate --url http://backend:5000
 volumes:
   db_data:
