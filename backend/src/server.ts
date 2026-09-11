@@ -6,6 +6,7 @@ import { ENV } from "./config/env.js";
 import { connectNeon } from "./config/db.js";
 import agentsRoute from "./routes/agents.route.js";
 import feedbackRoute from "./routes/feedback.route.js";
+import healthCheckRoute from "./routes/healthCheck.route.js";
 
 const app = express();
 
