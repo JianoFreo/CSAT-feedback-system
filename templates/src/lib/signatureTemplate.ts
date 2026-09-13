@@ -249,15 +249,13 @@ ${nameBlock}
       font-size:9pt;
       color:${ACCENT};
     "
-  >W:</span>
-  <span
+  >W: </span><span
     style="
       font-family:Arial,sans-serif;
       font-size:9pt;
       color:${LINK};
     "
-  >
-    <a
+  ><a
       href="https://cloudconsole.ph/"
       title="https://cloudconsole.ph/"
       style="
@@ -270,8 +268,7 @@ ${nameBlock}
       "
       rel="noreferrer"
       target="_blank"
-    >${COMPANY.website}</a>
-  </span>
+    >${COMPANY.website}</a></span>
 </div>
 
 <div
