@@ -9,7 +9,14 @@ type Props = {
 
 export function SignaturePreviewCard({ agentName, agentRole, onClose }: Props) {
   const [copied, setCopied] = useState(false);
-  const html = buildSignatureTemplate(agentName, agentRole);
+
+  let html = "";
+  let configError: string | null = null;
+  try {
+    html = buildSignatureTemplate(agentName, agentRole);
+  } catch (error) {
+    configError = error instanceof Error ? error.message : String(error);
+  }
 
   const handleCopy = async () => {
     try {
@@ -61,14 +68,20 @@ export function SignaturePreviewCard({ agentName, agentRole, onClose }: Props) {
         </div>
 
         {/* Signature preview */}
-        <div className="bg-gray-100 p-3">
-          <iframe
-            title={`signature-preview-${agentName}`}
-            srcDoc={html}
-            className="block h-[260px] w-full border-0"
-            sandbox=""
-          />
-        </div>
+        {configError ? (
+          <div className="m-3 rounded-md border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
+            Couldn't build the preview: {configError}
+          </div>
+        ) : (
+          <div className="bg-gray-100 p-3">
+            <iframe
+              title={`signature-preview-${agentName}`}
+              srcDoc={html}
+              className="block h-[260px] w-full border-0"
+              sandbox=""
+            />
+          </div>
+        )}
 
         {/* Actions */}
         <div className="flex justify-end gap-2 border-t border-gray-200 px-5 py-3">
@@ -81,7 +94,8 @@ export function SignaturePreviewCard({ agentName, agentRole, onClose }: Props) {
 
           <button
             onClick={handleCopy}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+            disabled={!!configError}
+            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-40"
           >
             {copied ? "✓ Copied" : "Copy signature"}
           </button>
