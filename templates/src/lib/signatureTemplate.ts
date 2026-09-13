@@ -177,8 +177,13 @@ ${nameBlock}
 <span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">E:</span><span class="cc-sig-value" style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">${escapeHtml(COMPANY.email)}</span>
 </div>
 
-<div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">W:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:#0563C1;"><a href="https://${COMPANY.website}/" title="https://${COMPANY.website}/" style="margin:0;" rel="noreferrer" target="_blank">${COMPANY.website}</a></span><span class="cc-sig-value" style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">&nbsp;</span>
+<div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;"><span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">W:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:#0563C1;"><a
+      href="https://cloudconsole.ph/"
+      title="https://cloudconsole.ph/"
+      style="margin:0;"
+      rel="noreferrer"
+      target="_blank"
+    >${COMPANY.website}</a></span><span class="cc-sig-value" style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">&nbsp;</span>
 </div>
 
 <div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
