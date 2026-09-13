@@ -41,6 +41,8 @@ function ratingButton(
   background: string,
   label: string
 ): string {
+  // Pill backgrounds are solid/saturated on purpose, so they stay readable
+  // in both light and dark mode without needing an override.
   return `<a href="${FEEDBACK_BASE}/${path}${query}" rel="noreferrer" style="display:block;width:${PILL_WIDTH}px;height:${PILL_HEIGHT}px;line-height:${PILL_HEIGHT}px;font-family:Arial,sans-serif;font-size:9px;font-weight:bold;color:${NAVY};background-color:${background};text-decoration:none;text-align:center;border-radius:15px;white-space:nowrap;">${label}</a>`;
 }
 
@@ -64,28 +66,48 @@ export function buildSignatureTemplate(
   const nameBlock = isGeneral
     ? ""
     : `<div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="font-family:Arial,sans-serif;color:${NAVY};">${safeName}</span>
+<span class="cc-sig-name" style="font-family:Arial,sans-serif;color:${NAVY};">${safeName}</span>
 </div>
 <div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="font-family:Arial,sans-serif;font-size:9pt;color:${VIOLET};">${safeRole}</span>
+<span class="cc-sig-role" style="font-family:Arial,sans-serif;font-size:9pt;color:${VIOLET};">${safeRole}</span>
 </div>`;
 
-  return `<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+  return `<div class="cc-sig-bg" style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
 
-<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="color:#000000;"><br></span>
+<style>
+  @media (prefers-color-scheme: dark) {
+    .cc-sig-bg { background-color: #1A1A1A !important; }
+    .cc-sig-fg { color: #EAEAEA !important; }
+    .cc-sig-value { color: #D5D5D5 !important; }
+    .cc-sig-name { color: #7FB2FF !important; }
+    .cc-sig-role { color: #C9A6FF !important; }
+    .cc-sig-muted { color: #8A8A8A !important; }
+  }
+  /* Gmail (and some webmail clients) flag dark mode with this attribute
+     on an ancestor instead of using prefers-color-scheme, so this is a
+     second path to the same overrides for those clients. */
+  [data-ogsc] .cc-sig-bg { background-color: #1A1A1A !important; }
+  [data-ogsc] .cc-sig-fg { color: #EAEAEA !important; }
+  [data-ogsc] .cc-sig-value { color: #D5D5D5 !important; }
+  [data-ogsc] .cc-sig-name { color: #7FB2FF !important; }
+  [data-ogsc] .cc-sig-role { color: #C9A6FF !important; }
+  [data-ogsc] .cc-sig-muted { color: #8A8A8A !important; }
+</style>
+
+<div class="cc-sig-bg" style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span class="cc-sig-fg" style="color:#000000;"><br></span>
 </div>
 
-<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="color:#000000;">Best Regards,</span>
+<div class="cc-sig-bg" style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span class="cc-sig-fg" style="color:#000000;">Best Regards,</span>
 </div>
 
-<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="color:#242424;">&nbsp;</span>
+<div class="cc-sig-bg" style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span class="cc-sig-fg" style="color:#242424;">&nbsp;</span>
 </div>
 
-<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="font-family:Arial,sans-serif;font-size:10pt;color:#000000;">&nbsp;</span>
+<div class="cc-sig-bg" style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span class="cc-sig-fg" style="font-family:Arial,sans-serif;font-size:10pt;color:#000000;">&nbsp;</span>
 </div>
 
 <table
@@ -148,23 +170,23 @@ export function buildSignatureTemplate(
 ${nameBlock}
 
 <div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">T:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">${escapeHtml(COMPANY.phone)}&nbsp;</span>
+<span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">T:</span><span class="cc-sig-value" style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">${escapeHtml(COMPANY.phone)}&nbsp;</span>
 </div>
 
 <div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">E:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">${escapeHtml(COMPANY.email)}</span>
+<span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">E:</span><span class="cc-sig-value" style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">${escapeHtml(COMPANY.email)}</span>
 </div>
 
 <div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">W:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:#0563C1;"><a href="https://${COMPANY.website}/" title="https://${COMPANY.website}/" style="margin:0;" rel="noreferrer" target="_blank">${COMPANY.website}</a></span><span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">&nbsp;</span>
+<span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">W:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:#0563C1;"><a href="https://${COMPANY.website}/" title="https://${COMPANY.website}/" style="margin:0;" rel="noreferrer" target="_blank">${COMPANY.website}</a></span><span class="cc-sig-value" style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">&nbsp;</span>
 </div>
 
 <div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">A:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">${escapeHtml(COMPANY.address)}</span>
+<span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">A:</span><span class="cc-sig-value" style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">${escapeHtml(COMPANY.address)}</span>
 </div>
 
 <div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">&nbsp;</span>
+<span class="cc-sig-value" style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">&nbsp;</span>
 </div>
 
 </td>
@@ -183,7 +205,7 @@ ${nameBlock}
   align="center"
 >
 
-<div style="margin:0 0 8px 0;font-family:Arial,sans-serif;font-size:12px;line-height:15px;font-weight:bold;color:${TEXT};text-align:center;">
+<div class="cc-sig-fg" style="margin:0 0 8px 0;font-family:Arial,sans-serif;font-size:12px;line-height:15px;font-weight:bold;color:${TEXT};text-align:center;">
 How did we do?
 </div>
 
@@ -227,12 +249,12 @@ ${ratingButton("not-good", query, "#FFD0D6", "Not Good")}
 </tbody>
 </table>
 
-<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="font-family:Arial,sans-serif;font-size:10pt;color:#000000;">&nbsp;</span>
+<div class="cc-sig-bg" style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span class="cc-sig-fg" style="font-family:Arial,sans-serif;font-size:10pt;color:#000000;">&nbsp;</span>
 </div>
 
-<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="font-family:Arial,sans-serif;font-size:7.5pt;color:${MUTED};">${escapeHtml(COMPANY.disclaimer)}</span>
+<div class="cc-sig-bg" style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span class="cc-sig-muted" style="font-family:Arial,sans-serif;font-size:7.5pt;color:${MUTED};">${escapeHtml(COMPANY.disclaimer)}</span>
 </div>
 
 </div>`;
