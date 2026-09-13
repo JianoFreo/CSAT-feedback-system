@@ -8,13 +8,13 @@ const LOGO_WIDTH = 134;
 const LOGO_HEIGHT = 70;
 
 const COMPANY = {
-  phone: " +63 2 8231 2520",
-  email: " support@cloudconsole.ph",
-  website: " cloudconsole.ph",
+  phone: "+63 2 8231 2520",
+  email: "support@cloudconsole.ph",
+  website: "cloudconsole.ph",
   address:
-    " 2nd Floor ZETA II Building #25D, 191 Salcedo St., Legaspi Village, Makati City 1229, Metro Manila, Philippines",
+    "2nd Floor ZETA II Building #25D, 191 Salcedo St., Legaspi Village, Makati City 1229, Metro Manila, Philippines",
   disclaimer:
-    " The content of this message is the proprietary and confidential property of CloudConsole. If you are not the intended recipient and have received this message in error, please delete this message from your computer system and notify me immediately by reply e-mail. Any unauthorised use or distribution of the content of this message is prohibited. Thank you. Please consider the environment before printing this email.",
+    "The content of this message is the proprietary and confidential property of CloudConsole. If you are not the intended recipient and have received this message in error, please delete this message from your computer system and notify me immediately by reply e-mail. Any unauthorised use or distribution of the content of this message is prohibited. Thank you. Please consider the environment before printing this email.",
 };
 
 const TEXT = "#14355D";
@@ -90,13 +90,13 @@ export function buildSignatureTemplate(
     color:${TEXT};
   "
 >
-<span
-  style="
-    font-family:Arial,sans-serif;
-    font-size:11pt;
-    color:${TEXT};
-  "
->${safeName}</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:11pt;
+      color:${TEXT};
+    "
+  >${safeName}</span>
 </div>
 
 <div
@@ -109,13 +109,13 @@ export function buildSignatureTemplate(
     color:${LINK};
   "
 >
-<span
-  style="
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    color:${LINK};
-  "
->${safeRole}</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${LINK};
+    "
+  >${safeRole}</span>
 </div>`;
 
   return `<table
@@ -189,20 +189,20 @@ ${nameBlock}
     color:${TEXT};
   "
 >
-<span
-  style="
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    color:${ACCENT};
-  "
->T:</span>
-<span
-  style="
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    color:${TEXT};
-  "
->${escapeHtml(COMPANY.phone)}&nbsp;</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${ACCENT};
+    "
+  >T:</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${TEXT};
+    "
+  >${escapeHtml(COMPANY.phone)}&nbsp;</span>
 </div>
 
 <div
@@ -216,20 +216,20 @@ ${nameBlock}
     color:${TEXT};
   "
 >
-<span
-  style="
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    color:${ACCENT};
-  "
->E:</span>
-<span
-  style="
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    color:${TEXT};
-  "
->${escapeHtml(COMPANY.email)}</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${ACCENT};
+    "
+  >E:</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${TEXT};
+    "
+  >${escapeHtml(COMPANY.email)}</span>
 </div>
 
 <div
@@ -243,35 +243,35 @@ ${nameBlock}
     color:${LINK};
   "
 >
-<span
-  style="
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    color:${ACCENT};
-  "
->W:</span>
-<span
-  style="
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    color:${LINK};
-  "
->
-<a
-  href="https://cloudconsole.ph/"
-  title="https://cloudconsole.ph/"
-  style="
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    color:${LINK};
-    text-decoration:underline;
-  "
-  rel="noreferrer"
-  target="_blank"
->${COMPANY.website}</a>
-</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${ACCENT};
+    "
+  >W:</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${LINK};
+    "
+  >
+    <a
+      href="https://cloudconsole.ph/"
+      title="https://cloudconsole.ph/"
+      style="
+        margin:0;
+        padding:0;
+        font-family:Arial,sans-serif;
+        font-size:9pt;
+        color:${LINK};
+        text-decoration:underline;
+      "
+      rel="noreferrer"
+      target="_blank"
+    >${COMPANY.website}</a>
+  </span>
 </div>
 
 <div
@@ -284,20 +284,20 @@ ${nameBlock}
     color:${TEXT};
   "
 >
-<span
-  style="
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    color:${ACCENT};
-  "
->A:</span>
-<span
-  style="
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    color:${TEXT};
-  "
->${escapeHtml(COMPANY.address)}</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${ACCENT};
+    "
+  >A:</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${TEXT};
+    "
+  >${escapeHtml(COMPANY.address)}</span>
 </div>
 
 <div
@@ -310,13 +310,13 @@ ${nameBlock}
     color:${TEXT};
   "
 >
-<span
-  style="
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    color:${TEXT};
-  "
->&nbsp;</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${TEXT};
+    "
+  >&nbsp;</span>
 </div>
 
 </td>
@@ -347,13 +347,13 @@ ${nameBlock}
     text-align:center;
   "
 >
-<span
-  style="
-    font-family:Arial,sans-serif;
-    font-size:12px;
-    color:${TEXT};
-  "
->How did we do?</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:12px;
+      color:${TEXT};
+    "
+  >How did we do?</span>
 </div>
 
 <table
@@ -370,10 +370,12 @@ ${nameBlock}
 <tbody>
 
 <tr>
-<td style="
-  padding:2px 0;
-  text-align:center;
-">
+<td
+  style="
+    padding:2px 0;
+    text-align:center;
+  "
+>
 ${ratingButton(
   "awesome",
   query,
@@ -384,10 +386,12 @@ ${ratingButton(
 </tr>
 
 <tr>
-<td style="
-  padding:2px 0;
-  text-align:center;
-">
+<td
+  style="
+    padding:2px 0;
+    text-align:center;
+  "
+>
 ${ratingButton(
   "just-okay",
   query,
@@ -398,10 +402,12 @@ ${ratingButton(
 </tr>
 
 <tr>
-<td style="
-  padding:2px 0;
-  text-align:center;
-">
+<td
+  style="
+    padding:2px 0;
+    text-align:center;
+  "
+>
 ${ratingButton(
   "not-good",
   query,
@@ -430,18 +436,12 @@ ${ratingButton(
     color:${MUTED};
   "
 >
-<span
-  style="
-    font-family:Arial,sans-serif;
-    font-size:7.5pt;
-    color:${MUTED};
-  "
->${escapeHtml(COMPANY.disclaimer)}</span>
-</div>
-
-</td>
-
-</tr>
-</tbody>
-</table>`;
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:7.5pt;
+      color:${MUTED};
+    "
+  >${escapeHtml(COMPANY.disclaimer)}</span>
+</div>`;
 }
