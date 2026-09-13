@@ -19,6 +19,7 @@ const COMPANY = {
 
 const ACCENT = "#35EBDB";
 const NAVY = "#14355D";
+const VIOLET = "#7C3AED";
 const TEXT = "#222222";
 const MUTED = "#AAAAAA";
 
@@ -63,7 +64,10 @@ export function buildSignatureTemplate(
   const nameBlock = isGeneral
     ? ""
     : `<div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-<span style="font-family:Arial,sans-serif;color:${NAVY};">${safeName}&nbsp;</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:${NAVY};">${safeRole}</span>
+<span style="font-family:Arial,sans-serif;color:${NAVY};">${safeName}</span>
+</div>
+<div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span style="font-family:Arial,sans-serif;font-size:9pt;color:${VIOLET};">${safeRole}</span>
 </div>`;
 
   return `<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
@@ -168,9 +172,9 @@ ${nameBlock}
 <!-- CSAT -->
 
 <td
-  width="270"
+  width="100"
   style="
-    width:270px;
+    width:100px;
     padding:0;
     vertical-align:middle;
     text-align:center;
@@ -195,21 +199,25 @@ How did we do?
   "
 >
 <tbody>
-<tr>
 
-<td style="padding:0 2px;">
+<tr>
+<td style="padding:2px 0;text-align:center;">
 ${ratingButton("awesome", query, "#B4E5DA", "Very Good")}
 </td>
+</tr>
 
-<td style="padding:0 2px;">
+<tr>
+<td style="padding:2px 0;text-align:center;">
 ${ratingButton("just-okay", query, "#FDDBB5", "Just Okay")}
 </td>
+</tr>
 
-<td style="padding:0 2px;">
+<tr>
+<td style="padding:2px 0;text-align:center;">
 ${ratingButton("not-good", query, "#FFD0D6", "Not Good")}
 </td>
-
 </tr>
+
 </tbody>
 </table>
 
