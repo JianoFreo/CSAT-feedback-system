@@ -22,8 +22,15 @@ export async function connectNeon() {
     CREATE TABLE IF NOT EXISTS agents (
       id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
+      role TEXT NOT NULL DEFAULT '',
       created_at TIMESTAMPTZ NOT NULL DEFAULT now()
     )
+  `;
+
+  // Migration for databases created before "role" existed.
+  await sql`
+    ALTER TABLE agents
+    ADD COLUMN IF NOT EXISTS role TEXT NOT NULL DEFAULT ''
   `;
 
   await sql`

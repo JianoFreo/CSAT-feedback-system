@@ -7,6 +7,7 @@ import { SortDropdown } from "./components/SortDropdown";
 import { ErrorBanner } from "./components/ui/ErrorBanner";
 import { AgentList } from "./components/AgentList";
 import NoAgent from "./components/NoAgent";
+import GeneralSignature from "./components/GeneralSignature";
 
 type SortBy = "name" | "created_at";
 type SortDirection = "asc" | "desc";
@@ -158,6 +159,7 @@ function App() {
           {/* Sidebar */}
           <div className="lg:sticky lg:top-10 lg:self-start">
             <NoAgent />
+            <GeneralSignature />
           </div>
 
         </div>
