@@ -14,7 +14,7 @@ const COMPANY = {
   address:
     " 2nd Floor ZETA II Building #25D, 191 Salcedo St., Legaspi Village, Makati City 1229, Metro Manila, Philippines",
   disclaimer:
-    "The content of this message is the proprietary and confidential property of CloudConsole. If you are not the intended recipient and have received this message in error, please delete this message from your computer system and notify me immediately by reply e-mail. Any unauthorised use or distribution of the content of this message is prohibited. Thank you. Please consider the environment before printing this email.",
+    " The content of this message is the proprietary and confidential property of CloudConsole. If you are not the intended recipient and have received this message in error, please delete this message from your computer system and notify me immediately by reply e-mail. Any unauthorised use or distribution of the content of this message is prohibited. Thank you. Please consider the environment before printing this email.",
 };
 
 const ACCENT = "#35EBDB";
@@ -64,170 +64,176 @@ export function buildSignatureTemplate(
   const nameBlock = isGeneral
     ? ""
     : `<div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-        <span style="font-family:Arial,sans-serif;color:${NAVY};">${safeName}</span>
-      </div>
-      <div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-        <span style="font-family:Arial,sans-serif;font-size:9pt;color:${VIOLET};">${safeRole}</span>
-      </div>`;
+<span style="font-family:Arial,sans-serif;color:${NAVY};">${safeName}</span>
+</div>
+<div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span style="font-family:Arial,sans-serif;font-size:9pt;color:${VIOLET};">${safeRole}</span>
+</div>`;
 
   return `<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
 
-  <div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-    <span style="color:#000000;"><br></span>
-  </div>
+<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span style="color:#000000;"><br></span>
+</div>
 
-  <div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-    <span style="color:#000000;">Best Regards,</span>
-  </div>
+<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span style="color:#000000;">Best Regards,</span>
+</div>
 
-  <div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-    <span style="color:#242424;">&nbsp;</span>
-  </div>
+<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span style="color:#242424;">&nbsp;</span>
+</div>
 
-  <div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-    <span style="font-family:Arial,sans-serif;font-size:10pt;color:#000000;">&nbsp;</span>
-  </div>
+<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span style="font-family:Arial,sans-serif;font-size:10pt;color:#000000;">&nbsp;</span>
+</div>
 
-  <table
-    border="0"
-    cellpadding="0"
-    cellspacing="0"
-    width="100%"
-    style="
-      width:100%;
-      border-collapse:collapse;
-      border-spacing:0;
-    "
-  >
-    <tbody>
-      <tr>
+<table
+  border="0"
+  cellpadding="0"
+  cellspacing="0"
+  width="100%"
+  style="
+    width:100%;
+    border-collapse:collapse;
+    border-spacing:0;
+  "
+>
+<tbody>
+<tr>
 
-        <!-- LOGO -->
+<!-- LOGO -->
 
-        <td
-          width="140"
-          style="
-            width:140px;
-            padding:0 6pt 0 0;
-            vertical-align:top;
-          "
-          valign="top"
-        >
-          <div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-            <span style="color:#000000;">
-              <img
-                alt="CloudConsole IT Consulting"
-                width="${LOGO_WIDTH}"
-                height="${LOGO_HEIGHT}"
-                style="
-                  width:${LOGO_WIDTH}px;
-                  height:${LOGO_HEIGHT}px;
-                  min-width:auto;
-                  min-height:auto;
-                  margin:0;
-                  border:0;
-                "
-                src="${LOGO_URL}"
-              >
-            </span>
-          </div>
-        </td>
+<td
+  width="140"
+  style="
+    width:140px;
+    padding:0 6pt 0 0;
+    vertical-align:top;
+  "
+  valign="top"
+>
+<div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span style="color:#000000;">
+<img
+  alt="CloudConsole IT Consulting"
+  width="${LOGO_WIDTH}"
+  height="${LOGO_HEIGHT}"
+  style="
+    width:${LOGO_WIDTH}px;
+    height:${LOGO_HEIGHT}px;
+    min-width:auto;
+    min-height:auto;
+    margin:0;
+    border:0;
+  "
+  src="${LOGO_URL}"
+>
+</span>
+</div>
+</td>
 
-        <!-- CONTACT -->
+<!-- CONTACT -->
 
-        <td
-          style="
-            width:auto;
-            border-left:2.25pt solid ${ACCENT};
-            padding:0 0 0 6pt;
-            vertical-align:top;
-          "
-          valign="top"
-        >
-          ${nameBlock}
+<td
+  style="
+    width:auto;
+    border-left:2.25pt solid ${ACCENT};
+    padding:0 0 0 6pt;
+    vertical-align:top;
+  "
+  valign="top"
+>
 
-          <div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-            <span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">T:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">${escapeHtml(COMPANY.phone)}&nbsp;</span>
-          </div>
+${nameBlock}
 
-          <div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-            <span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">E:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">${escapeHtml(COMPANY.email)}</span>
-          </div>
+<div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">T:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">${escapeHtml(COMPANY.phone)}&nbsp;</span>
+</div>
 
-          <div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-            <span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">W:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:#0563C1;"><a href="https://${COMPANY.website}/" title="https://${COMPANY.website}/" style="margin:0;" rel="noreferrer" target="_blank">${COMPANY.website}</a></span><span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">&nbsp;</span>
-          </div>
+<div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">E:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">${escapeHtml(COMPANY.email)}</span>
+</div>
 
-          <div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-            <span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">A:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">${escapeHtml(COMPANY.address)}</span>
-          </div>
+<div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">W:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:#0563C1;"><a href="https://${COMPANY.website}/" title="https://${COMPANY.website}/" style="margin:0;" rel="noreferrer" target="_blank">${COMPANY.website}</a></span><span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">&nbsp;</span>
+</div>
 
-          <div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-            <span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">&nbsp;</span>
-          </div>
-        </td>
+<div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span style="font-family:Arial,sans-serif;font-size:9pt;color:${ACCENT};">A:</span><span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">${escapeHtml(COMPANY.address)}</span>
+</div>
 
-        <!-- CSAT -->
+<div style="margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span style="font-family:Arial,sans-serif;font-size:9pt;color:${TEXT};">&nbsp;</span>
+</div>
 
-        <td
-          width="100"
-          style="
-            width:100px;
-            padding:0;
-            vertical-align:middle;
-            text-align:center;
-          "
-          valign="middle"
-          align="center"
-        >
-          <div style="margin:0 0 8px 0;font-family:Arial,sans-serif;font-size:12px;line-height:15px;font-weight:bold;color:${TEXT};text-align:center;">
-            How did we do?
-          </div>
+</td>
 
-          <table
-            border="0"
-            cellpadding="0"
-            cellspacing="0"
-            align="center"
-            style="
-              border-collapse:collapse;
-              border-spacing:0;
-              margin:0 auto;
-            "
-          >
-            <tbody>
-              <tr>
-                <td style="padding:2px 0;text-align:center;">
-                  ${ratingButton("awesome", query, "#B4E5DA", "Very Good")}
-                </td>
-              </tr>
+<!-- CSAT -->
 
-              <tr>
-                <td style="padding:2px 0;text-align:center;">
-                  ${ratingButton("just-okay", query, "#FDDBB5", "Just Okay")}
-                </td>
-              </tr>
+<td
+  width="100"
+  style="
+    width:100px;
+    padding:0;
+    vertical-align:middle;
+    text-align:center;
+  "
+  valign="middle"
+  align="center"
+>
 
-              <tr>
-                <td style="padding:2px 0;text-align:center;">
-                  ${ratingButton("not-good", query, "#FFD0D6", "Not Good")}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
+<div style="margin:0 0 8px 0;font-family:Arial,sans-serif;font-size:12px;line-height:15px;font-weight:bold;color:${TEXT};text-align:center;">
+How did we do?
+</div>
 
-      </tr>
-    </tbody>
-  </table>
+<table
+  border="0"
+  cellpadding="0"
+  cellspacing="0"
+  align="center"
+  style="
+    border-collapse:collapse;
+    border-spacing:0;
+    margin:0 auto;
+  "
+>
+<tbody>
 
-  <div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-    <span style="font-family:Arial,sans-serif;font-size:10pt;color:#000000;">&nbsp;</span>
-  </div>
+<tr>
+<td style="padding:2px 0;text-align:center;">
+${ratingButton("awesome", query, "#B4E5DA", "Very Good")}
+</td>
+</tr>
 
-  <div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
-    <span style="font-family:Arial,sans-serif;font-size:7.5pt;color:${MUTED};">${escapeHtml(COMPANY.disclaimer)}</span>
-  </div>
+<tr>
+<td style="padding:2px 0;text-align:center;">
+${ratingButton("just-okay", query, "#FDDBB5", "Just Okay")}
+</td>
+</tr>
+
+<tr>
+<td style="padding:2px 0;text-align:center;">
+${ratingButton("not-good", query, "#FFD0D6", "Not Good")}
+</td>
+</tr>
+
+</tbody>
+</table>
+
+</td>
+
+</tr>
+</tbody>
+</table>
+
+<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span style="font-family:Arial,sans-serif;font-size:10pt;color:#000000;">&nbsp;</span>
+</div>
+
+<div style="background-color:#FFFFFF;margin:0;font-family:Calibri,sans-serif;font-size:11pt;">
+<span style="font-family:Arial,sans-serif;font-size:7.5pt;color:${MUTED};">${escapeHtml(COMPANY.disclaimer)}</span>
+</div>
 
 </div>`;
 }
