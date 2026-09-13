@@ -13,9 +13,9 @@ export async function addAgent(req: Request, res: Response) {
 
   try {
     const [agent] = await sql`
-      INSERT INTO agents (name, role)
-      VALUES (${parsed.data.name}, ${parsed.data.role})
-      RETURNING id, name, role, created_at
+      INSERT INTO agents (name)
+      VALUES (${parsed.data.name})
+      RETURNING id, name, created_at
     `;
 
     res.status(201).json({ message: "Agent added", agent });

@@ -5,7 +5,7 @@ import { sql } from "../../config/db.js";
 export async function getAllAgents(req: Request, res: Response) {
   try {
     const agents = await sql`
-      SELECT id, name, role, created_at
+      SELECT id, name, created_at
       FROM agents
       ORDER BY created_at DESC
     `;

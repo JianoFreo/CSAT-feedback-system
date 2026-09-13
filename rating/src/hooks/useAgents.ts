@@ -5,7 +5,6 @@ export type Agent = {
   id: number;
   created_at: string;
   name: string;
-  role: string;
 };
 
 export function useAgents() {
@@ -33,7 +32,7 @@ export function useAgents() {
     getAgents();
   }, []);
 
-  const addAgent = async (name: string, role: string) => {
+  const addAgent = async (name: string) => {
     const value = name.trim();
     if (!value) return;
 
@@ -41,10 +40,7 @@ export function useAgents() {
     setError(null);
 
     try {
-      const { data } = await api.post<{ agent: Agent }>("/api/agents", {
-        name: value,
-        role: role.trim(),
-      });
+      const { data } = await api.post<{ agent: Agent }>("/api/agents", { name: value });
       setAgents((current) => [data.agent, ...current]);
     } catch (err) {
       setError(extractErrorMessage(err));
