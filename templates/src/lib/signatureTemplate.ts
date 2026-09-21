@@ -152,9 +152,8 @@ export function buildSignatureTemplate(
   border="0"
   cellpadding="0"
   cellspacing="0"
-  width="100%"
   style="
-    width:100%;
+    width:auto;
     border-collapse:collapse;
     border-spacing:0;
     font-family:Arial,sans-serif;
@@ -198,7 +197,8 @@ export function buildSignatureTemplate(
 
 <td
   style="
-    width:auto;
+    width:340px;
+    max-width:340px;
     border-left:2.25pt solid ${ACCENT};
     padding:0 12px 0 10px;
     vertical-align:top;
