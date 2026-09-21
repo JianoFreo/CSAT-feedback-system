@@ -1,15 +1,24 @@
 import { useMemo, useState } from "react";
 import { Copy, Check } from "lucide-react";
-import { buildSignatureTemplate } from "./lib/signatureTemplate";
+import {
+  buildSignatureTemplate,
+  buildSignatureTemplateStacked,
+} from "./lib/signatureTemplate";
+
+type Layout = "side" | "stacked";
 
 function App() {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [copied, setCopied] = useState(false);
+  const [layout, setLayout] = useState<Layout>("side");
 
   const html = useMemo(
-    () => buildSignatureTemplate(name, role),
-    [name, role]
+    () =>
+      layout === "side"
+        ? buildSignatureTemplate(name, role)
+        : buildSignatureTemplateStacked(name, role),
+    [name, role, layout]
   );
 
   const handleCopy = async () => {
@@ -72,6 +81,37 @@ function App() {
             </div>
           </div>
 
+          {/* Layout */}
+          <div className="mb-6">
+            <label className="mb-1 block text-xs font-medium text-gray-600">
+              Format
+            </label>
+            <div className="inline-flex rounded-lg border border-gray-300 p-1">
+              <button
+                type="button"
+                onClick={() => setLayout("side")}
+                className={`rounded-md px-3 py-1.5 text-xs font-medium transition ${
+                  layout === "side"
+                    ? "bg-blue-600 text-white"
+                    : "text-gray-600 hover:bg-gray-100"
+                }`}
+              >
+                CSAT on the side
+              </button>
+              <button
+                type="button"
+                onClick={() => setLayout("stacked")}
+                className={`rounded-md px-3 py-1.5 text-xs font-medium transition ${
+                  layout === "stacked"
+                    ? "bg-blue-600 text-white"
+                    : "text-gray-600 hover:bg-gray-100"
+                }`}
+              >
+                CSAT below
+              </button>
+            </div>
+          </div>
+
           {/* Preview */}
           <div className="mb-2 text-xs font-medium text-gray-600">
             Preview
@@ -80,7 +120,9 @@ function App() {
             <iframe
               title="signature-preview"
               srcDoc={html}
-              className="block h-[220px] w-full border-0"
+              className={`block w-full border-0 ${
+                layout === "side" ? "h-[220px]" : "h-[280px]"
+              }`}
               sandbox=""
             />
           </div>

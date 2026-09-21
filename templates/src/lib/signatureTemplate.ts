@@ -442,3 +442,351 @@ ${ratingButton(
   >${escapeHtml(COMPANY.disclaimer)}</span>
 </div>`;
 }
+
+/**
+ * Same signature content and styling as buildSignatureTemplate, except the
+ * CSAT block sits below the logo/contact row instead of beside it, with the
+ * three rating buttons laid out horizontally in a single row.
+ */
+export function buildSignatureTemplateStacked(
+  agentName: string,
+  agentRole: string
+): string {
+  const trimmedName = agentName.trim();
+  const trimmedRole = agentRole.trim();
+
+  const isGeneral = trimmedName.length === 0;
+  const encodedAgent = encodeURIComponent(trimmedName);
+
+  const safeName = escapeHtml(trimmedName);
+  const safeRole = escapeHtml(trimmedRole);
+
+  const query = isGeneral
+    ? "?ticketID={{ticket.id}}"
+    : `?agent=${encodedAgent}&ticketID={{ticket.id}}`;
+
+  const nameBlock = isGeneral
+    ? ""
+    : `<div
+  style="
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+    font-size:11pt;
+    line-height:normal;
+    color:${TEXT};
+  "
+>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:11pt;
+      color:${TEXT};
+    "
+  >${safeName}</span>
+</div>
+
+<div
+  style="
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+    font-size:9pt;
+    line-height:normal;
+    color:${LINK};
+  "
+>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${LINK};
+    "
+  >${safeRole}</span>
+</div>`;
+
+  return `<table
+  border="0"
+  cellpadding="0"
+  cellspacing="0"
+  width="100%"
+  style="
+    width:100%;
+    border-collapse:collapse;
+    border-spacing:0;
+    font-family:Arial,sans-serif;
+  "
+>
+<tbody>
+<tr>
+
+<!-- LOGO -->
+
+<td
+  width="140"
+  style="
+    width:140px;
+    padding:0 10px 0 0;
+    vertical-align:top;
+  "
+  valign="top"
+>
+
+<img
+  alt="CloudConsole IT Consulting"
+  width="${LOGO_WIDTH}"
+  height="${LOGO_HEIGHT}"
+  style="
+    display:block;
+    width:${LOGO_WIDTH}px;
+    height:${LOGO_HEIGHT}px;
+    min-width:${LOGO_WIDTH}px;
+    min-height:${LOGO_HEIGHT}px;
+    margin:0;
+    padding:0;
+    border:0;
+  "
+  src="${LOGO_URL}"
+>
+
+</td>
+
+<!-- CONTACT -->
+
+<td
+  style="
+    width:auto;
+    border-left:2.25pt solid ${ACCENT};
+    padding:0 12px 0 10px;
+    vertical-align:top;
+  "
+  valign="top"
+>
+
+${nameBlock}
+
+<div
+  style="
+    margin:4px 0 0 0;
+    padding:0;
+    font-family:Arial,sans-serif;
+    font-size:9pt;
+    line-height:14px;
+    white-space:nowrap;
+    color:${TEXT};
+  "
+>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${ACCENT};
+    "
+  >T:</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${TEXT};
+    "
+  >${escapeHtml(COMPANY.phone)}&nbsp;</span>
+</div>
+
+<div
+  style="
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+    font-size:9pt;
+    line-height:14px;
+    white-space:nowrap;
+    color:${TEXT};
+  "
+>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${ACCENT};
+    "
+  >E:</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${TEXT};
+    "
+  >${escapeHtml(COMPANY.email)}</span>
+</div>
+
+<div
+  style="
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+    font-size:9pt;
+    line-height:14px;
+    white-space:nowrap;
+    color:${LINK};
+  "
+>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${ACCENT};
+    "
+  >W: </span><span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${LINK};
+    "
+  ><a
+      href="https://cloudconsole.ph/"
+      title="https://cloudconsole.ph/"
+      style="
+        margin:0;
+        padding:0;
+        font-family:Arial,sans-serif;
+        font-size:9pt;
+        color:${LINK};
+        text-decoration:underline;
+      "
+      rel="noreferrer"
+      target="_blank"
+    >${COMPANY.website}</a></span>
+</div>
+
+<div
+  style="
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+    font-size:9pt;
+    line-height:14px;
+    color:${TEXT};
+  "
+>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${ACCENT};
+    "
+  >A:</span>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:9pt;
+      color:${TEXT};
+    "
+  >${escapeHtml(COMPANY.address)}</span>
+</div>
+
+</td>
+
+</tr>
+</tbody>
+</table>
+
+<!-- CSAT (stacked below, horizontal) -->
+
+<div
+  style="
+    margin:12px 0 0 0;
+    padding:0;
+    font-family:Arial,sans-serif;
+    font-size:12px;
+    line-height:15px;
+    font-weight:bold;
+    color:${TEXT};
+  "
+>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:12px;
+      color:${TEXT};
+    "
+  >How did we do?</span>
+</div>
+
+<table
+  border="0"
+  cellpadding="0"
+  cellspacing="0"
+  style="
+    border-collapse:collapse;
+    border-spacing:0;
+    margin:8px 0 0 0;
+  "
+>
+<tbody>
+<tr>
+
+<td
+  style="
+    padding:0 8px 0 0;
+    text-align:center;
+  "
+>
+${ratingButton(
+  "awesome",
+  query,
+  "#B4E5DA",
+  "Very Good"
+)}
+</td>
+
+<td
+  style="
+    padding:0 8px 0 0;
+    text-align:center;
+  "
+>
+${ratingButton(
+  "just-okay",
+  query,
+  "#FDDBB5",
+  "Just Okay"
+)}
+</td>
+
+<td
+  style="
+    padding:0;
+    text-align:center;
+  "
+>
+${ratingButton(
+  "not-good",
+  query,
+  "#FFD0D6",
+  "Not Good"
+)}
+</td>
+
+</tr>
+</tbody>
+</table>
+
+<div
+  style="
+    margin:10px 0 0 0;
+    padding:0;
+    font-family:Arial,sans-serif;
+    font-size:7.5pt;
+    line-height:11px;
+    color:${MUTED};
+  "
+>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:7.5pt;
+      color:${MUTED};
+    "
+  >${escapeHtml(COMPANY.disclaimer)}</span>
+</div>`;
+}
