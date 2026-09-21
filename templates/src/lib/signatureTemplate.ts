@@ -61,6 +61,36 @@ function ratingButton(
 >${label}</a>`;
 }
 
+function ratingButtonInline(
+  path: string,
+  query: string,
+  background: string,
+  label: string,
+  isLast: boolean
+): string {
+  return `<a
+  href="${FEEDBACK_BASE}/${path}${query}"
+  rel="noreferrer"
+  style="
+    display:inline-block;
+    vertical-align:middle;
+    width:${PILL_WIDTH}px;
+    height:${PILL_HEIGHT}px;
+    line-height:${PILL_HEIGHT}px;
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    font-weight:bold;
+    color:${TEXT};
+    background-color:${background};
+    text-decoration:none;
+    text-align:center;
+    border-radius:15px;
+    white-space:nowrap;
+    margin:0 ${isLast ? "0" : "8px"} 0 0;
+  "
+>${label}</a>`;
+}
+
 export function buildSignatureTemplate(
   agentName: string,
   agentRole: string
@@ -690,6 +720,27 @@ ${nameBlock}
 </tbody>
 </table>
 
+<!-- DISCLAIMER -->
+
+<div
+  style="
+    margin:10px 0 0 0;
+    padding:0;
+    font-family:Arial,sans-serif;
+    font-size:7.5pt;
+    line-height:11px;
+    color:${MUTED};
+  "
+>
+  <span
+    style="
+      font-family:Arial,sans-serif;
+      font-size:7.5pt;
+      color:${MUTED};
+    "
+  >${escapeHtml(COMPANY.disclaimer)}</span>
+</div>
+
 <!-- CSAT (stacked below, horizontal) -->
 
 <div
@@ -712,81 +763,32 @@ ${nameBlock}
   >How did we do?</span>
 </div>
 
-<table
-  border="0"
-  cellpadding="0"
-  cellspacing="0"
+<div
   style="
-    border-collapse:collapse;
-    border-spacing:0;
     margin:8px 0 0 0;
+    padding:0;
   "
 >
-<tbody>
-<tr>
-
-<td
-  style="
-    padding:0 8px 0 0;
-    text-align:center;
-  "
->
-${ratingButton(
+${ratingButtonInline(
   "awesome",
   query,
   "#B4E5DA",
-  "Very Good"
+  "Very Good",
+  false
 )}
-</td>
-
-<td
-  style="
-    padding:0 8px 0 0;
-    text-align:center;
-  "
->
-${ratingButton(
+${ratingButtonInline(
   "just-okay",
   query,
   "#FDDBB5",
-  "Just Okay"
+  "Just Okay",
+  false
 )}
-</td>
-
-<td
-  style="
-    padding:0;
-    text-align:center;
-  "
->
-${ratingButton(
+${ratingButtonInline(
   "not-good",
   query,
   "#FFD0D6",
-  "Not Good"
+  "Not Good",
+  true
 )}
-</td>
-
-</tr>
-</tbody>
-</table>
-
-<div
-  style="
-    margin:10px 0 0 0;
-    padding:0;
-    font-family:Arial,sans-serif;
-    font-size:7.5pt;
-    line-height:11px;
-    color:${MUTED};
-  "
->
-  <span
-    style="
-      font-family:Arial,sans-serif;
-      font-size:7.5pt;
-      color:${MUTED};
-    "
-  >${escapeHtml(COMPANY.disclaimer)}</span>
 </div>`;
 }

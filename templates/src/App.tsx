@@ -5,23 +5,26 @@ import {
   buildSignatureTemplateStacked,
 } from "./lib/signatureTemplate";
 
-type Layout = "side" | "stacked";
-
 function App() {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
-  const [copied, setCopied] = useState(false);
-  const [layout, setLayout] = useState<Layout>("side");
+  const [copiedSide, setCopiedSide] = useState(false);
+  const [copiedStacked, setCopiedStacked] = useState(false);
 
-  const html = useMemo(
-    () =>
-      layout === "side"
-        ? buildSignatureTemplate(name, role)
-        : buildSignatureTemplateStacked(name, role),
-    [name, role, layout]
+  const htmlSide = useMemo(
+    () => buildSignatureTemplate(name, role),
+    [name, role]
   );
 
-  const handleCopy = async () => {
+  const htmlStacked = useMemo(
+    () => buildSignatureTemplateStacked(name, role),
+    [name, role]
+  );
+
+  const copyHtml = async (
+    html: string,
+    onDone: (copied: boolean) => void
+  ) => {
     try {
       const blob = new Blob([html], { type: "text/html" });
 
@@ -29,8 +32,8 @@ function App() {
         new ClipboardItem({ "text/html": blob }),
       ]);
 
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      onDone(true);
+      setTimeout(() => onDone(false), 2000);
     } catch (error) {
       console.error("Failed to copy signature template:", error);
     }
@@ -38,7 +41,7 @@ function App() {
 
   return (
     <main className="min-h-screen bg-gray-100 px-4 py-10">
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto max-w-5xl">
         <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
 
           {/* Header */}
@@ -81,72 +84,76 @@ function App() {
             </div>
           </div>
 
-          {/* Layout */}
-          <div className="mb-6">
-            <label className="mb-1 block text-xs font-medium text-gray-600">
-              Format
-            </label>
-            <div className="inline-flex rounded-lg border border-gray-300 p-1">
-              <button
-                type="button"
-                onClick={() => setLayout("side")}
-                className={`rounded-md px-3 py-1.5 text-xs font-medium transition ${
-                  layout === "side"
-                    ? "bg-blue-600 text-white"
-                    : "text-gray-600 hover:bg-gray-100"
-                }`}
-              >
+          {/* Previews */}
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+
+            {/* CSAT on the side */}
+            <div>
+              <div className="mb-2 text-xs font-medium text-gray-600">
                 CSAT on the side
-              </button>
+              </div>
+              <div className="mb-3 overflow-hidden rounded-md border border-gray-200 bg-gray-50 p-3">
+                <iframe
+                  title="signature-preview-side"
+                  srcDoc={htmlSide}
+                  className="block h-[220px] w-full border-0"
+                  sandbox=""
+                />
+              </div>
               <button
-                type="button"
-                onClick={() => setLayout("stacked")}
-                className={`rounded-md px-3 py-1.5 text-xs font-medium transition ${
-                  layout === "stacked"
-                    ? "bg-blue-600 text-white"
-                    : "text-gray-600 hover:bg-gray-100"
-                }`}
+                onClick={() => copyHtml(htmlSide, setCopiedSide)}
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700"
               >
-                CSAT below
+                {copiedSide ? (
+                  <>
+                    <Check className="h-4 w-4" />
+                    Copied
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-4 w-4" />
+                    Copy signature
+                  </>
+                )}
               </button>
             </div>
+
+            {/* CSAT below */}
+            <div>
+              <div className="mb-2 text-xs font-medium text-gray-600">
+                CSAT below
+              </div>
+              <div className="mb-3 overflow-hidden rounded-md border border-gray-200 bg-gray-50 p-3">
+                <iframe
+                  title="signature-preview-stacked"
+                  srcDoc={htmlStacked}
+                  className="block h-[270px] w-full border-0"
+                  sandbox=""
+                />
+              </div>
+              <button
+                onClick={() => copyHtml(htmlStacked, setCopiedStacked)}
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700"
+              >
+                {copiedStacked ? (
+                  <>
+                    <Check className="h-4 w-4" />
+                    Copied
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-4 w-4" />
+                    Copy signature
+                  </>
+                )}
+              </button>
+            </div>
+
           </div>
 
-          {/* Preview */}
-          <div className="mb-2 text-xs font-medium text-gray-600">
-            Preview
-          </div>
-          <div className="mb-6 overflow-hidden rounded-md border border-gray-200 bg-gray-50 p-3">
-            <iframe
-              title="signature-preview"
-              srcDoc={html}
-              className={`block w-full border-0 ${
-                layout === "side" ? "h-[220px]" : "h-[280px]"
-              }`}
-              sandbox=""
-            />
-          </div>
-
-          {/* Copy */}
-          <button
-            onClick={handleCopy}
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700"
-          >
-            {copied ? (
-              <>
-                <Check className="h-4 w-4" />
-                Copied
-              </>
-            ) : (
-              <>
-                <Copy className="h-4 w-4" />
-                Copy signature
-              </>
-            )}
-          </button>
-
-          <p className="mt-3 text-center text-xs text-gray-400">
-            Paste this directly into the agent's Freshdesk signature settings.
+          <p className="mt-6 text-center text-xs text-gray-400">
+            Paste either one directly into the agent's Freshdesk signature
+            settings.
           </p>
 
         </div>
