@@ -25,6 +25,14 @@ const MUTED = "#667085";
 const PILL_WIDTH = 78;
 const PILL_HEIGHT = 30;
 
+// Rendered width of the LOGO + CONTACT + CSAT row:
+// LOGO   140 + 10 (padding-right)                = 150
+// CONTACT 340 + 22 (padding) + ~3 (border-left)   = 365
+// CSAT   100 + 0                                  = 100
+// -----------------------------------------------------
+// TOTAL                                             615
+const SIGNATURE_WIDTH = 615;
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")
@@ -40,7 +48,7 @@ function ratingButton(
   background: string,
   label: string
 ): string {
-  return `<a
+  return `
   href="${FEEDBACK_BASE}/${path}${query}"
   rel="noreferrer"
   style="
@@ -57,36 +65,6 @@ function ratingButton(
     text-align:center;
     border-radius:15px;
     white-space:nowrap;
-  "
->${label}</a>`;
-}
-
-function ratingButtonInline(
-  path: string,
-  query: string,
-  background: string,
-  label: string,
-  isLast: boolean
-): string {
-  return `<a
-  href="${FEEDBACK_BASE}/${path}${query}"
-  rel="noreferrer"
-  style="
-    display:inline-block;
-    vertical-align:middle;
-    width:${PILL_WIDTH}px;
-    height:${PILL_HEIGHT}px;
-    line-height:${PILL_HEIGHT}px;
-    font-family:Arial,sans-serif;
-    font-size:9px;
-    font-weight:bold;
-    color:${TEXT};
-    background-color:${background};
-    text-decoration:none;
-    text-align:center;
-    border-radius:15px;
-    white-space:nowrap;
-    margin:0 ${isLast ? "0" : "8px"} 0 0;
   "
 >${label}</a>`;
 }
@@ -152,8 +130,11 @@ export function buildSignatureTemplate(
   border="0"
   cellpadding="0"
   cellspacing="0"
+  width="${SIGNATURE_WIDTH}"
+  align="left"
   style="
-    width:auto;
+    width:${SIGNATURE_WIDTH}px;
+    max-width:${SIGNATURE_WIDTH}px;
     border-collapse:collapse;
     border-spacing:0;
     font-family:Arial,sans-serif;
@@ -285,7 +266,7 @@ ${nameBlock}
       font-size:9pt;
       color:${LINK};
     "
-  ><a
+  >
       href="https://cloudconsole.ph/"
       title="https://cloudconsole.ph/"
       style="
@@ -453,283 +434,32 @@ ${ratingButton(
 </tbody>
 </table>
 
-<div
-  style="
-    margin:10px 0 0 0;
-    padding:0;
-    font-family:Arial,sans-serif;
-    font-size:7.5pt;
-    line-height:11px;
-    color:${MUTED};
-  "
->
-  <span
-    style="
-      font-family:Arial,sans-serif;
-      font-size:7.5pt;
-      color:${MUTED};
-    "
-  >${escapeHtml(COMPANY.disclaimer)}</span>
-</div>`;
-}
+<!-- DISCLAIMER: fixed to the same width as the table above -->
 
-/**
- * Same signature content and styling as buildSignatureTemplate, except the
- * CSAT block sits below the logo/contact row instead of beside it, with the
- * three rating buttons laid out horizontally in a single row.
- */
-export function buildSignatureTemplateStacked(
-  agentName: string,
-  agentRole: string
-): string {
-  const trimmedName = agentName.trim();
-  const trimmedRole = agentRole.trim();
-
-  const isGeneral = trimmedName.length === 0;
-  const encodedAgent = encodeURIComponent(trimmedName);
-
-  const safeName = escapeHtml(trimmedName);
-  const safeRole = escapeHtml(trimmedRole);
-
-  const query = isGeneral
-    ? "?ticketID={{ticket.id}}"
-    : `?agent=${encodedAgent}&ticketID={{ticket.id}}`;
-
-  const nameBlock = isGeneral
-    ? ""
-    : `<div
-  style="
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
-    font-size:11pt;
-    line-height:normal;
-    color:${TEXT};
-  "
->
-  <span
-    style="
-      font-family:Arial,sans-serif;
-      font-size:11pt;
-      color:${TEXT};
-    "
-  >${safeName}</span>
-</div>
-
-<div
-  style="
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    line-height:normal;
-    color:${LINK};
-  "
->
-  <span
-    style="
-      font-family:Arial,sans-serif;
-      font-size:9pt;
-      color:${LINK};
-    "
-  >${safeRole}</span>
-</div>`;
-
-  return `<table
+<table
   border="0"
   cellpadding="0"
   cellspacing="0"
-  width="100%"
+  width="${SIGNATURE_WIDTH}"
+  align="left"
   style="
-    width:100%;
+    width:${SIGNATURE_WIDTH}px;
+    max-width:${SIGNATURE_WIDTH}px;
     border-collapse:collapse;
     border-spacing:0;
-    font-family:Arial,sans-serif;
   "
 >
 <tbody>
 <tr>
-
-<!-- LOGO -->
-
-<td
-  width="140"
-  style="
-    width:140px;
-    padding:0 10px 0 0;
-    vertical-align:top;
-  "
-  valign="top"
->
-
-<img
-  alt="CloudConsole IT Consulting"
-  width="${LOGO_WIDTH}"
-  height="${LOGO_HEIGHT}"
-  style="
-    display:block;
-    width:${LOGO_WIDTH}px;
-    height:${LOGO_HEIGHT}px;
-    min-width:${LOGO_WIDTH}px;
-    min-height:${LOGO_HEIGHT}px;
-    margin:0;
-    padding:0;
-    border:0;
-  "
-  src="${LOGO_URL}"
->
-
-</td>
-
-<!-- CONTACT -->
-
 <td
   style="
-    width:auto;
-    border-left:2.25pt solid ${ACCENT};
-    padding:0 12px 0 10px;
-    vertical-align:top;
-  "
-  valign="top"
->
-
-${nameBlock}
-
-<div
-  style="
-    margin:4px 0 0 0;
-    padding:0;
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    line-height:14px;
-    white-space:nowrap;
-    color:${TEXT};
-  "
->
-  <span
-    style="
-      font-family:Arial,sans-serif;
-      font-size:9pt;
-      color:${ACCENT};
-    "
-  >T:</span>
-  <span
-    style="
-      font-family:Arial,sans-serif;
-      font-size:9pt;
-      color:${TEXT};
-    "
-  >${escapeHtml(COMPANY.phone)}&nbsp;</span>
-</div>
-
-<div
-  style="
     margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    line-height:14px;
-    white-space:nowrap;
-    color:${TEXT};
-  "
->
-  <span
-    style="
-      font-family:Arial,sans-serif;
-      font-size:9pt;
-      color:${ACCENT};
-    "
-  >E:</span>
-  <span
-    style="
-      font-family:Arial,sans-serif;
-      font-size:9pt;
-      color:${TEXT};
-    "
-  >${escapeHtml(COMPANY.email)}</span>
-</div>
-
-<div
-  style="
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    line-height:14px;
-    white-space:nowrap;
-    color:${LINK};
-  "
->
-  <span
-    style="
-      font-family:Arial,sans-serif;
-      font-size:9pt;
-      color:${ACCENT};
-    "
-  >W: </span><span
-    style="
-      font-family:Arial,sans-serif;
-      font-size:9pt;
-      color:${LINK};
-    "
-  ><a
-      href="https://cloudconsole.ph/"
-      title="https://cloudconsole.ph/"
-      style="
-        margin:0;
-        padding:0;
-        font-family:Arial,sans-serif;
-        font-size:9pt;
-        color:${LINK};
-        text-decoration:underline;
-      "
-      rel="noreferrer"
-      target="_blank"
-    >${COMPANY.website}</a></span>
-</div>
-
-<div
-  style="
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
-    font-size:9pt;
-    line-height:14px;
-    color:${TEXT};
-  "
->
-  <span
-    style="
-      font-family:Arial,sans-serif;
-      font-size:9pt;
-      color:${ACCENT};
-    "
-  >A:</span>
-  <span
-    style="
-      font-family:Arial,sans-serif;
-      font-size:9pt;
-      color:${TEXT};
-    "
-  >${escapeHtml(COMPANY.address)}</span>
-</div>
-
-</td>
-
-</tr>
-</tbody>
-</table>
-
-<!-- DISCLAIMER -->
-
-<div
-  style="
-    margin:10px 0 0 0;
-    padding:0;
+    padding:10px 0 0 0;
     font-family:Arial,sans-serif;
     font-size:7.5pt;
     line-height:11px;
     color:${MUTED};
+    word-wrap:break-word;
   "
 >
   <span
@@ -739,56 +469,8 @@ ${nameBlock}
       color:${MUTED};
     "
   >${escapeHtml(COMPANY.disclaimer)}</span>
-</div>
-
-<!-- CSAT (stacked below, horizontal) -->
-
-<div
-  style="
-    margin:12px 0 0 0;
-    padding:0;
-    font-family:Arial,sans-serif;
-    font-size:12px;
-    line-height:15px;
-    font-weight:bold;
-    color:${TEXT};
-  "
->
-  <span
-    style="
-      font-family:Arial,sans-serif;
-      font-size:12px;
-      color:${TEXT};
-    "
-  >How did we do?</span>
-</div>
-
-<div
-  style="
-    margin:8px 0 0 0;
-    padding:0;
-  "
->
-${ratingButtonInline(
-  "awesome",
-  query,
-  "#B4E5DA",
-  "Very Good",
-  false
-)}
-${ratingButtonInline(
-  "just-okay",
-  query,
-  "#FDDBB5",
-  "Just Okay",
-  false
-)}
-${ratingButtonInline(
-  "not-good",
-  query,
-  "#FFD0D6",
-  "Not Good",
-  true
-)}
-</div>`;
+</td>
+</tr>
+</tbody>
+</table>`;
 }
