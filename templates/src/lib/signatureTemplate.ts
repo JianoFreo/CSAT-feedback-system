@@ -25,14 +25,6 @@ const MUTED = "#667085";
 const PILL_WIDTH = 78;
 const PILL_HEIGHT = 30;
 
-// Rendered width of the LOGO + CONTACT + CSAT row:
-// LOGO   140 + 10 (padding-right)                = 150
-// CONTACT 340 + 22 (padding) + ~3 (border-left)   = 365
-// CSAT   100 + 0                                  = 100
-// -----------------------------------------------------
-// TOTAL                                             615
-const SIGNATURE_WIDTH = 615;
-
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")
@@ -48,7 +40,7 @@ function ratingButton(
   background: string,
   label: string
 ): string {
-  return `
+  return `<a
   href="${FEEDBACK_BASE}/${path}${query}"
   rel="noreferrer"
   style="
@@ -130,11 +122,8 @@ export function buildSignatureTemplate(
   border="0"
   cellpadding="0"
   cellspacing="0"
-  width="${SIGNATURE_WIDTH}"
-  align="left"
   style="
-    width:${SIGNATURE_WIDTH}px;
-    max-width:${SIGNATURE_WIDTH}px;
+    width:auto;
     border-collapse:collapse;
     border-spacing:0;
     font-family:Arial,sans-serif;
@@ -266,7 +255,7 @@ ${nameBlock}
       font-size:9pt;
       color:${LINK};
     "
-  >
+  ><a
       href="https://cloudconsole.ph/"
       title="https://cloudconsole.ph/"
       style="
@@ -434,32 +423,16 @@ ${ratingButton(
 </tbody>
 </table>
 
-<!-- DISCLAIMER: fixed to the same width as the table above -->
-
-<table
-  border="0"
-  cellpadding="0"
-  cellspacing="0"
-  width="${SIGNATURE_WIDTH}"
-  align="left"
+<div
   style="
-    width:${SIGNATURE_WIDTH}px;
-    max-width:${SIGNATURE_WIDTH}px;
-    border-collapse:collapse;
-    border-spacing:0;
-  "
->
-<tbody>
-<tr>
-<td
-  style="
-    margin:0;
-    padding:10px 0 0 0;
+    width:580px;
+    max-width:580px;
+    margin:10px 0 0 0;
+    padding:0;
     font-family:Arial,sans-serif;
     font-size:7.5pt;
     line-height:11px;
     color:${MUTED};
-    word-wrap:break-word;
   "
 >
   <span
@@ -469,8 +442,5 @@ ${ratingButton(
       color:${MUTED};
     "
   >${escapeHtml(COMPANY.disclaimer)}</span>
-</td>
-</tr>
-</tbody>
-</table>`;
+</div>`;
 }
