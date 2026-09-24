@@ -434,13 +434,11 @@ ${ratingButton(
     line-height:11px;
     color:${MUTED};
   "
->
-  <span
+><span
     style="
       font-family:Arial,sans-serif;
       font-size:7.5pt;
       color:${MUTED};
-    "
-  >${escapeHtml(COMPANY.disclaimer)}</span>
+    ">${escapeHtml(COMPANY.disclaimer)}</span>
 </div>`;
 }
